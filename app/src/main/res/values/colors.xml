@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#B43434A5</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#CAD7C633</color>
+    <color name="ddd">#00574B</color>
+    <color name="calendarView">#91CEDCDA</color>
+    <color name="calendar_background">#1F53DD34</color>
+    <color name="myDate_text">#000000</color>
+    <color name="main_container">#3DC3C3CD</color>
+    <color name="nutritional_into_text">#70000000</color>
+    <color name="Foodpopup_name">#000000</color>
+</resources>
