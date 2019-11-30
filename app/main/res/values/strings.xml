@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Kcalmera</string>
+    <string name="title_cam">Food Camera</string>
+    <string name="title_manage">Diet</string>
+    <string name="title_profile">Profile</string>
+</resources>

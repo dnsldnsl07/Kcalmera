@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="80dp"
+        android:text="사용자 정보를 등록해주세요."
+        android:textSize="24sp" />
+
+
+    <RadioGroup
+        android:id="@+id/sexGroup"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/mButton">
+
+   <!--     <TextView
+            android:id="@+id/sexText"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/nameText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            android:ems="2"
+            android:hint="성별" />-->
+
+        <RadioButton
+            android:id="@+id/mButton"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="남성" />
+
+        <RadioButton
+            android:id="@+id/feButton"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="10dp"
+            android:text="여성" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:hint="이름"
+        android:inputType="textPersonName" />
+
+
+    <EditText
+        android:id="@+id/ageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/nameText"
+        android:ems="10"
+        android:hint="나이"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/heightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/ageText"
+        android:ems="10"
+        android:hint="키"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/weightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/heightText"
+        android:ems="10"
+        android:hint="체중"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/weightText"
+        android:text="확인" />
+
+</LinearLayout>
