@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
+                android:maxLength="2"
                 android:text="남성"
                 android:textSize="23dp" />
         </LinearLayout>
@@ -99,7 +100,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:inputType="numberSigned"
+                android:inputType="number"
+                android:maxLength="3"
                 android:text="25"
                 android:textSize="23dp"
                 app:layout_constraintStart_toEndOf="@+id/ageText" />
@@ -135,7 +137,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:inputType="numberSigned"
+                android:maxLength="6"
+                android:inputType="numberDecimal"
                 android:text="178"
                 android:textSize="23dp" />
 
@@ -169,7 +172,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:inputType="numberSigned"
+                android:maxLength="6"
+                android:inputType="numberDecimal"
                 android:text="70"
                 android:textSize="23dp" />
 

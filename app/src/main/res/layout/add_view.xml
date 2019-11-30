@@ -42,6 +42,7 @@
             android:id="@+id/addAmountEditView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:maxLength="6"
             android:ems="10"
             android:inputType="numberDecimal" />
     </LinearLayout>
