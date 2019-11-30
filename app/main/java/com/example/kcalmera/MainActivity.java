@@ -250,7 +250,7 @@ public class MainActivity extends FragmentActivity {
 
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("/data/data/com.example.kcalmera/files/"+"profile.txt"));
+            br = new BufferedReader(new FileReader("/mnt/sdcard/Android/data/com.example.kcalmera/files/Documents/"+"profile.txt"));
         }
         catch (Exception e)
         {
@@ -263,7 +263,7 @@ public class MainActivity extends FragmentActivity {
         String height = new String(Height.getText().toString());
         String weight = new String(Weight.getText().toString());
 
-        File file = new File(getFilesDir(), "profile.txt") ;
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath() + File.separator + "profile.txt");
         FileWriter fw = null ;
         BufferedWriter bufwr = null ;
         try {
