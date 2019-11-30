@@ -60,7 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
                 editor.putInt("First", 1);
                 editor.commit();
 
-                File file = new File(getFilesDir(), "profile.txt") ;
+                File fileDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+                File file = new File(fileDir.getPath() + File.separator + "profile.txt");
                 FileWriter fw = null ;
                 BufferedWriter bufwr = null ;
                 try {
