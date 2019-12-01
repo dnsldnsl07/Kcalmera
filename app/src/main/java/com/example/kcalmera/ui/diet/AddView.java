@@ -3,8 +3,12 @@
 package com.example.kcalmera.ui.diet;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Checkable;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
@@ -18,8 +22,7 @@ import androidx.annotation.Nullable;
 
 
 public class AddView extends LinearLayout {
-
-    EditText addFoodEditView;
+    AutoCompleteTextView addFoodEditView;
     EditText addAmountEditView;
 
     public AddView(Context context) {
@@ -32,11 +35,10 @@ public class AddView extends LinearLayout {
         init(context);
     }
 
-
     public void init(Context context){
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.add_view,this,true);
-        addFoodEditView = (EditText) findViewById(R.id.addFoodEditView);
+        final View textEntryView = inflater.inflate(R.layout.add_view,this,true);
+        addFoodEditView = (AutoCompleteTextView) textEntryView.findViewById(R.id.addFoodEditView);
         addAmountEditView = (EditText) findViewById(R.id.addAmountEditView);
     }
 

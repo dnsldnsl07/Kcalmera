@@ -16,8 +16,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,11 +40,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -112,8 +110,6 @@ public class MainActivity extends FragmentActivity {
             startActivity(intent);
         }
 
-
-
         // 권한 체크
         TedPermission.with(getApplicationContext())
                 .setPermissionListener(permissionListener)
@@ -154,7 +150,6 @@ public class MainActivity extends FragmentActivity {
                 }
             }
         });
-
     }
 
     PermissionListener permissionListener = new PermissionListener() {

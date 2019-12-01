@@ -16,12 +16,12 @@
             android:text="음식 이름: "
             android:textSize="24sp" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/addFoodEditView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:ems="10"
-            android:inputType="" />
+            android:completionThreshold="1"
+            android:ems="10" />
 
     </LinearLayout>
 

@@ -43,8 +43,13 @@ public class ImageClassifier {
 
     private static final int DIM_PIXEL_SIZE = 3;
 
-    static final int DIM_IMG_SIZE_X = 224;
-    static final int DIM_IMG_SIZE_Y = 224;
+    // mobilenet
+  //  static final int DIM_IMG_SIZE_X = 224;
+  //  static final int DIM_IMG_SIZE_Y = 224;
+
+    // inception
+    static final int DIM_IMG_SIZE_X = 299;
+    static final int DIM_IMG_SIZE_Y = 299;
 
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 256.0f;
