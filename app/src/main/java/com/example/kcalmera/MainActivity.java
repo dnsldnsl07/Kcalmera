@@ -325,7 +325,7 @@ public class MainActivity extends FragmentActivity {
         //str1 음식이름, str2 양
         try {
             db.execSQL("insert into diet_diary(foodName,amount) values (" + String.format("'%s'", str1) + ", " + String.format("'%s'", str2) + ");");
-            Cursor c = db.rawQuery("select time, foodName, amount, _id from diet_diary order by time DESC limit 1", null);
+            Cursor c = db.rawQuery("select time, foodName, amount, _id from diet_diary order by _id DESC limit 1", null);
             String str = "";
             c.moveToNext();
             String time = c.getString(0);
@@ -349,7 +349,7 @@ public class MainActivity extends FragmentActivity {
         try {
             try {
                 db.execSQL("insert into diet_diary(foodName,amount) values (" + String.format("'%s'", str1) + ", " + String.format("'%s'", str2) + ");");
-                Cursor c_tmp = db.rawQuery("select _id from diet_diary order by time DESC limit 1", null);
+                Cursor c_tmp = db.rawQuery("select _id from diet_diary order by _id DESC limit 1", null);
                 c_tmp.moveToNext();
                 pmk_tmp = c_tmp.getInt(0);
                 db.execSQL("update diet_diary set time = " + String.format("'%s %s'", str3,"12:00:00") + "where _id = " + String.format("'%d'", pmk_tmp) + ";");
