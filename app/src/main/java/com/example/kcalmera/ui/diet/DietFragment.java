@@ -186,8 +186,15 @@ public class DietFragment extends Fragment {
                             //식단 table에 추가
                             //array2 = food_info.split("/");
                             try {
-                                if (d[0] != curDayOfMonth) {
-                                    str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName, amount, "" + y[0] + "-" + m[0]  + "-" + d[0]);
+                                if ((d[0] != curDayOfMonth) || (m[0] != curMonth+1) || (y[0] != curYear)){
+                                    //2019-9-1 -> 2019-09-01 로 변환
+                                    String t1 = "-";
+                                    String t2 = "-";
+                                    if(m[0] < 10)
+                                        t1="-0";
+                                    if(d[0] < 10)
+                                        t2="-0";
+                                    str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName, amount, "" + y[0] + t1 + m[0]  + t2 + d[0]);
                                 } else
                                     str = ((MainActivity) MainActivity.mContext).insertRecord(foodName, amount);
                             }
@@ -334,6 +341,15 @@ public class DietFragment extends Fragment {
             adapter.notifyDataSetChanged();
 
             //오늘 날짜 식단 table 데이터 가져와서 list의 item들 추가
+            //2019-9-1 -> 2019-09-01 mysql DATETIME의 format에 맞춘다
+            String t1 = "-";
+            String t2 = "-";
+            if(curMonth+1 < 10)
+                t1="-0";
+            if(curDayOfMonth < 10)
+                t2="-0";
+            curDate = curYear + t1 + (curMonth+1) + t2 + curDayOfMonth;
+            
             Cursor c1 = ((MainActivity) MainActivity.mContext).selectRecord(curDate);
             String str_set = ((MainActivity) MainActivity.mContext).database_test(c1);
             String[] array_set = str_set.split("\n");
@@ -370,6 +386,15 @@ public class DietFragment extends Fragment {
                 y[0] =year;
                 m[0] = month+1;
                 d[0] = dayOfMonth ;
+                
+                //2019-9-1 -> 2019-09-01 로 변환
+                String t1 = "-";
+                String t2 = "-";
+                if(m[0] < 10)
+                    t1="-0";
+                if(d[0] < 10)
+                    t2="-0";
+                date = y[0] + t1 + m[0] + t2 + d[0];
 
                 //선택된 날짜의 식단 table 내용 가져와서 list item 갱신
                 try {
