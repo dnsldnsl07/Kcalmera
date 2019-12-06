@@ -81,7 +81,7 @@ def create_image_lists(image_dir, testing_percentage, validation_percentage):
       # grouping photos that are close variations of each other. For example
       # this is used in the plant disease data set to group multiple pictures of
       # the same leaf.
-      hash_name = re.sub(r'_nohash_.*$', '', file_name)
+      hash_name = re.sub(r'_nohash_.*$', '', base_name)
       # This looks a bit magical, but we need to decide whether this file should
       # go into the training, testing, or validation sets, and we want to keep
       # existing files in the same set even if more files are subsequently
