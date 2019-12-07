@@ -306,11 +306,13 @@ public class MainActivity extends FragmentActivity {
         Confirm.setVisibility(View.INVISIBLE);
     }
 
+    /*
     public void setProfile(View v){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         startActivityForResult(intent, PROFILE_REQUEST_CODE);
     }
+    */
 
     static public Bitmap resizeBitmap(Bitmap original) {
 
@@ -572,6 +574,7 @@ public class MainActivity extends FragmentActivity {
         }
 
         //프로필 사진 설정
+        /*
         else if(requestCode == PROFILE_REQUEST_CODE)
         {
             if(resultCode == RESULT_OK) {
@@ -587,6 +590,7 @@ public class MainActivity extends FragmentActivity {
             }
 
         }
+        */
 
     }
 }
