@@ -14,7 +14,7 @@
             android:layout_width="107dp"
             android:layout_height="38dp"
             android:layout_gravity="center"
-            android:text="음식 양: "
+            android:text="음식량: "
             android:textSize="24sp" />
 
         <EditText
