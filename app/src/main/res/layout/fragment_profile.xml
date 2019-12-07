@@ -5,24 +5,216 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:onClick="setProfile"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher"
+    <ScrollView
+        android:id="@+id/infoScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/headLineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="오늘 섭취한 영양소"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="@id/nutrients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/nutrients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headLineText">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="칼로리  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/kcal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 2000"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" kcal"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="탄수화물  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/carbohydrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 200"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" g"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="단백질  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/protein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 55"
+                        android:textSize="23dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" g"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="지방  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/fat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 50"
+                        android:textSize="23dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" g"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="나트륨  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/natrium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 2000"
+                        android:textSize="23dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" mg"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="콜레스테롤  "
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/cholesterol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:text="0 / 300"
+                        android:textSize="23dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" mg 미만"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:background="#FFF"
         android:gravity="bottom"
         android:orientation="vertical"
@@ -34,7 +226,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/nameText"
@@ -42,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="이름  "
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/nameText2"
@@ -50,16 +243,17 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:singleLine="true"
                 android:text="조영운"
-                android:textSize="23dp" />
+                android:textSize="17dp"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/sexText"
@@ -67,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="성별  "
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/sexText2"
@@ -76,16 +270,17 @@
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
                 android:maxLength="2"
-                android:singleLine="true"
                 android:text="남성"
-                android:textSize="23dp" />
+                android:textSize="17dp"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/ageText"
@@ -94,7 +289,7 @@
                 android:layout_below="@+id/sexText"
                 android:gravity="right"
                 android:text="나이  "
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/ageText2"
@@ -104,9 +299,9 @@
                 android:focusableInTouchMode="false"
                 android:inputType="number"
                 android:maxLength="3"
-                android:singleLine="true"
                 android:text="25"
-                android:textSize="23dp"
+                android:textSize="17dp"
+                android:singleLine="true"
                 app:layout_constraintStart_toEndOf="@+id/ageText" />
 
             <TextView
@@ -114,14 +309,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="세"
-                android:textSize="23dp" />
+                android:textSize="17dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/heightText"
@@ -130,7 +326,7 @@
                 android:layout_below="@+id/ageText"
                 android:gravity="right"
                 android:text="키  "
-                android:textSize="25dp"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ageText" />
 
@@ -140,25 +336,26 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:maxLength="6"
                 android:inputType="numberDecimal"
-                android:singleLine="true"
+                android:maxLength="6"
                 android:text="178"
-                android:textSize="23dp" />
+                android:textSize="17dp"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cm"
-                android:textSize="23dp" />
+                android:textSize="17dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/customborder"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/weightText"
@@ -166,8 +363,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_below="@+id/heightText"
-                android:text="몸무게"
-                android:textSize="25dp"
+                android:text="몸무게  "
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/heightText" />
 
@@ -177,18 +374,18 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
-                android:maxLength="6"
                 android:inputType="numberDecimal"
-                android:singleLine="true"
+                android:maxLength="6"
                 android:text="70"
-                android:textSize="23dp" />
+                android:textSize="17dp"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kg"
-                android:textSize="23dp" />
+                android:textSize="17dp" />
         </LinearLayout>
 
 
@@ -198,7 +395,7 @@
         android:id="@+id/edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="64dp"
         android:onClick="onClickEdit"
         android:text="수정"
         android:visibility="visible"
@@ -210,7 +407,7 @@
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="64dp"
         android:onClick="onClickConfirm"
         android:text="확인"
         android:visibility="invisible"
