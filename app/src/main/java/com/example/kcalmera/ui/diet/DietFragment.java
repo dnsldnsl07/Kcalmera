@@ -92,7 +92,7 @@ public class DietFragment extends Fragment {
             fat+=amount*items.get(i).fat;
         }
 
-        return String.format("총 영양소 정보\n총 칼로리: %.1f kcal \n탄수화물: %.1fg   단백질: %.1fg   지방: %.1fg ",kcal,carbohydrate,protein,fat);
+        return String.format("＊오늘 섭취한 영양소 정보＊\n칼로리: %.1f kcal \n탄수화물: %.1fg   단백질: %.1fg   지방: %.1fg ",kcal,carbohydrate,protein,fat);
     }
 
 
