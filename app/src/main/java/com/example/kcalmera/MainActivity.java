@@ -513,7 +513,7 @@ public class MainActivity extends FragmentActivity {
         Cursor c = db.rawQuery("select gram, kcal,carbohydrate,protein,fat,sugars,natrium,cholesterol,fatty_acid,trans_fat from food_info where foodName = " + String.format("'%s'", foodName) , null);
         if((c != null) && (c.getCount() > 0)) {
             c.moveToNext();
-            str+= String.format("%.2f/%.2f/%.2f/%.2f/%.2f/%.2f/%.2f/%.2f/%.2f/%.2f\n",c.getDouble(0), c.getDouble(1), c.getDouble(2), c.getDouble(3), c.getDouble(4),c.getDouble(5), c.getDouble(6), c.getDouble(7), c.getDouble(8), c.getDouble(9));
+            str+= String.format("%.1f/%.1f/%.1f/%.1f/%.1f/%.1f/%.1f/%.1f/%.1f/%.1f\n",c.getDouble(0), c.getDouble(1), c.getDouble(2), c.getDouble(3), c.getDouble(4),c.getDouble(5), c.getDouble(6), c.getDouble(7), c.getDouble(8), c.getDouble(9));
         }
         else
             str = null;
