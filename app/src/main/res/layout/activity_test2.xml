@@ -52,7 +52,7 @@
         android:layout_marginTop="0dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="섭취한 총 영양분"
+        android:text="총 영양소 정보"
         android:textColor="@color/myDate_text"
         android:textSize="16sp" />
 
