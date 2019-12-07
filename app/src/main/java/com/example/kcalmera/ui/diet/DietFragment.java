@@ -92,7 +92,7 @@ public class DietFragment extends Fragment {
             fat+=amount*items.get(i).fat;
         }
 
-        return String.format("총 영양소 정보\n총 칼로리: %.2f kcal \n탄: %.2fg   단: %.2fg   지: %.2fg ",kcal,carbohydrate,protein,fat);
+        return String.format("총 영양소 정보\n총 칼로리: %.1f kcal \n탄수화물: %.1fg   단백질: %.1fg   지방: %.1fg ",kcal,carbohydrate,protein,fat);
     }
 
 
@@ -540,7 +540,7 @@ class testAdapter extends BaseAdapter {
         tView.setText1(item.strName, item.amount);
         //item 그램 칼로리 탄 단 지
         // change
-        tView.setText2(String.format("    1회 제공량: %.1fg               칼로리: %.1fkcal\n    탄: %.1fg   단: %.1fg   지: %.1fg",item.gram,item.amount*item.kcal,item.amount*item.carbohydrate,item.amount*item.protein,item.amount*item.fat));
+        tView.setText2(String.format("    1회 제공량: %.1fg               칼로리: %.1fkcal\n    탄수화물: %.1fg   단백질: %.1fg   지방: %.1fg",item.gram,item.amount*item.kcal,item.amount*item.carbohydrate,item.amount*item.protein,item.amount*item.fat));
         return tView;
     }
 }
