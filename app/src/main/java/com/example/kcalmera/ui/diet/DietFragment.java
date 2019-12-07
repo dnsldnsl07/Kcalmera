@@ -102,15 +102,14 @@ public class DietFragment extends Fragment {
 
         CalendarView mCalendarView = (CalendarView) root.findViewById(R.id.calendarView);
         ScrollView scrollView2 = (ScrollView) root.findViewById(R.id.scrollView2);
-
         // Enable scroll bar
         scrollView2.setVerticalScrollBarEnabled(true);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(mCalendarView.getDate()));
-       final int curYear = calendar.get(Calendar.YEAR);
-       final int curMonth = calendar.get(Calendar.MONTH);
-       final int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        final int curYear = calendar.get(Calendar.YEAR);
+        final int curMonth = calendar.get(Calendar.MONTH);
+        final int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         final int[] y = new int[1];
         final int[] m = new int[1];
         final int[] d = new int[1];
@@ -138,13 +137,50 @@ public class DietFragment extends Fragment {
         final testAdapter adapter = new testAdapter(MainActivity.mContext,R.layout.test_item,items) ;
         listview.setAdapter(adapter) ;
 
+        // detection으로 인한 음식 add
+        if(MainActivity.check == 1){
+            String foodName = MainActivity.Food;
+            String amount = "1";
+            String str=null;
+            String[] array = null;
+            String[] array2 = null;
+            String food_info = ((MainActivity) MainActivity.mContext).selectFoodInfo(foodName);
+            try {
+                if ((d[0] != curDayOfMonth) || (m[0] != curMonth+1) || (y[0] != curYear)){
+                    //2019-9-1 -> 2019-09-01 로 변환
+                    String t1 = "-";
+                    String t2 = "-";
+                    if(m[0] < 10)
+                        t1="-0";
+                    if(d[0] < 10)
+                        t2="-0";
+                    str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName, amount, "" + y[0] + t1 + m[0]  + t2 + d[0]);
+                } else
+                    str = ((MainActivity) MainActivity.mContext).insertRecord(foodName, amount);
+            }
+            catch(Exception e)
+            {
+                Log.e("eee_add_pop_error",e.getMessage());
+            }
+            //식단 table과 음식정보 table에서 가져온 정보를 쪼갬
+            array2 = food_info.split("/");
+            array = str.split("/");
+
+            //list에 추가
+
+            items.add(new ItmStr(array[0], Double.parseDouble(array[1]), array[2], Integer.parseInt(array[3]), Double.parseDouble(array2[0]), Double.parseDouble(array2[1]), Double.parseDouble(array2[2]), Double.parseDouble(array2[3]), Double.parseDouble(array2[4])));
+            //총 영양소 정보 갱신
+            mycal.setText(sum(items));
+            //list view 갱신
+            adapter.notifyDataSetChanged();
+
+            MainActivity.check=-1;
+        }
+
         // add button에 대한 이벤트 처리.
         Button addButton = (Button)container2.findViewById(R.id.add) ;
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                int count;
-                count = adapter.getCount();
-
                 //간이창을 띄움
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.mContext);
 
@@ -504,7 +540,7 @@ class testAdapter extends BaseAdapter {
         tView.setText1(item.strName, item.amount);
         //item 그램 칼로리 탄 단 지
         // change
-        tView.setText2(String.format("    1회 제공량: %.1fg               칼로리: %.1fkcal\n    탄: %.1fg 단: %.1fg 지: %.1fg",item.amount*item.gram,item.amount*item.kcal,item.amount*item.carbohydrate,item.amount*item.protein,item.amount*item.fat));
+        tView.setText2(String.format("    1회 제공량: %.1fg               칼로리: %.1fkcal\n    탄: %.1fg   단: %.1fg   지: %.1fg",item.gram,item.amount*item.kcal,item.amount*item.carbohydrate,item.amount*item.protein,item.amount*item.fat));
         return tView;
     }
 }

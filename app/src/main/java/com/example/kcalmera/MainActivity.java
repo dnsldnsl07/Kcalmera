@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -55,7 +56,8 @@ public class MainActivity extends FragmentActivity {
     private static final String TAG = "TfLiteCameraDemo";
 
     public static Context mContext;
-
+    public static String Food;
+    public static int check=-1;
     SQLiteDatabase db;
 
     @Override
@@ -194,12 +196,16 @@ public class MainActivity extends FragmentActivity {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
-    public void onClickCam1(View v) {
+    public void onClickAccept(View v) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         finish();
+        TextView getFood=(TextView) findViewById(R.id.DetectedFood);
+        Food = getFood.getText().toString();
+        check=1;
         startActivity(intent);
     }
-    public void onClickCam2(View v) {
+
+    public void onClickCancel(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
@@ -555,6 +561,9 @@ public class MainActivity extends FragmentActivity {
 
             String textToShow = classifier.classifyFrame(resizeBitmap);
             Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
+
+            TextView Foodview=(TextView) findViewById(R.id.DetectedFood);
+            Foodview.setText(Food);
 
             if (classifier != null) {
                 classifier.close();

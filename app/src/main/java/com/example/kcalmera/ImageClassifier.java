@@ -44,12 +44,12 @@ public class ImageClassifier {
     private static final int DIM_PIXEL_SIZE = 3;
 
     // mobilenet
-  //  static final int DIM_IMG_SIZE_X = 224;
-  //  static final int DIM_IMG_SIZE_Y = 224;
+    static final int DIM_IMG_SIZE_X = 224;
+    static final int DIM_IMG_SIZE_Y = 224;
 
     // inception
-    static final int DIM_IMG_SIZE_X = 299;
-    static final int DIM_IMG_SIZE_Y = 299;
+   // static final int DIM_IMG_SIZE_X = 299;
+  //  static final int DIM_IMG_SIZE_Y = 299;
 
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 256.0f;
@@ -210,8 +210,46 @@ public class ImageClassifier {
         final int size = sortedLabels.size();
         for (int i = 0; i < size; ++i) {
             Map.Entry<String, Float> label = sortedLabels.poll();
-            textToShow = String.format("\n%s: %4.2f",label.getKey(),label.getValue()) + textToShow;
+            textToShow = String.format("\n%s: %4.2f",translate(label.getKey()),label.getValue()) + textToShow;
+            MainActivity.Food = String.format("%s",translate(label.getKey()));
         }
         return textToShow;
+    }
+
+    //english to korean
+    private String translate(String input){
+        switch(input){
+            case "baekkimchi" : return "백김치";
+            case "bap" : return "밥";
+            case "bulgogi" : return "불고기";
+            case "dakgalbi" : return "닭갈비";
+            case "doenjangjjigae" : return "된장찌개";
+            case "friedchicken" : return "후라이드치킨";
+            case "gamjachaebokkeum" : return "감자채볶음";
+            case "ganjanggejang" : return "간장게장";
+            case "gimbap" : return "김밥";
+            case "godeungeogui" : return "고등어구이";
+            case "gomtang" : return "곰탕";
+            case "gyeranfried" : return "계란후라이";
+            case "gyeranjjim" : return "계란찜";
+            case "gyeranmari" : return "계란말이";
+            case "japchae" : return "잡채";
+            case "jeyukbokkeum" : return "제육볶음";
+            case "jjajangmyeon" : return "짜장면";
+            case "jjamppong" : return "짬뽕";
+            case "kimchi" : return "김치";
+            case "kimchijjigae" : return "김치찌개";
+            case "kkakdugi" : return "깍두기";
+            case "mandu" : return "만두";
+            case "miyeokguk" : return "미역국";
+            case "pizza" : return "피자";
+            case "ramyeon" : return "라면";
+            case "samgyeopsal" : return "삼겹살";
+            case "sigeumchinamul" : return "시금치나물";
+            case "sundae" : return "순대";
+            case "tteokbokki" : return "떡볶이";
+            case "yangnyeomchickien" : return "양념치킨";
+            default : return "error";
+        }
     }
 }

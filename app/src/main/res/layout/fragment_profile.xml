@@ -160,6 +160,7 @@
                 android:id="@+id/weightText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:layout_below="@+id/heightText"
                 android:text="몸무게"
                 android:textSize="25dp"
