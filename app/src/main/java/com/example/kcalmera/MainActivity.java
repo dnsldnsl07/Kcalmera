@@ -1,6 +1,7 @@
 package com.example.kcalmera;
 
 import android.Manifest;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,19 +16,23 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.example.kcalmera.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -41,9 +46,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
+import androidx.core.app.NavUtils;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -293,7 +301,6 @@ public class MainActivity extends FragmentActivity {
         } catch (Exception e) {
             e.printStackTrace() ;
         }
-
         Name.setFocusable(false);
         Name.setFocusableInTouchMode(false);
         Sex.setFocusable(false);
@@ -306,6 +313,64 @@ public class MainActivity extends FragmentActivity {
         Weight.setFocusableInTouchMode(false);
         Edit.setVisibility(View.VISIBLE);
         Confirm.setVisibility(View.INVISIBLE);
+
+        final int AGE = Integer.parseInt(Age.getText().toString());
+        final double HEIGHT = Double.parseDouble(Height.getText().toString());
+        final double WEIGHT = Double.parseDouble(Weight.getText().toString());
+        final String SEX = Sex.getText().toString();
+        // TO DO: 활동 레벨 구현
+        // 기초 대사율
+        final double BMR = ProfileFragment.WEIGHT_FACTOR * WEIGHT + ProfileFragment.HEIGHT_FACTOR * HEIGHT - ProfileFragment.AGE_FACTOR * AGE
+                + (SEX.equals("남성")? ProfileFragment.MALE_BIAS : ProfileFragment.FEMALE_BIAS);
+        // TO DO: 활동 레벨 구현 필요
+        final double RECOMMENDED_KCAL = BMR * ProfileFragment.ACTIVITY_LEVEL[1];
+        final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_KCAL * ProfileFragment.CARBOHYDRATE_FACTOR;
+        final double RECOMMENDED_PROTEIN = WEIGHT * ProfileFragment.PROTEIN_FACTOR;
+        final double RECOMMENDED_FAT = RECOMMENDED_KCAL * ProfileFragment.FAT_FACTOR;
+        double kcal = 0, carbohydrate = 0, protein = 0, fat = 0, natrium = 0, cholesterol = 0;
+        TextView kcalText = (TextView) findViewById(R.id.kcal);
+        TextView carbohydrateText = (TextView) findViewById(R.id.carbohydrate);
+        TextView proteinText = (TextView) findViewById(R.id.protein);
+        TextView fatText = (TextView) findViewById(R.id.fat);
+        TextView natriumText = (TextView) findViewById(R.id.natrium);
+        TextView cholesterolText = (TextView) findViewById(R.id.cholesterol);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String curDate = format.format(calendar.getTime());
+        Cursor cursor = ((MainActivity) MainActivity.mContext).selectRecord(curDate);
+        String dietString = ((MainActivity) MainActivity.mContext).database_test(cursor);
+        String diets[] = dietString.split("\n");
+
+        if (!diets[0].equals("")) { // else: 식단 없음
+            for (int i = 0; i < diets.length; ++i) {
+                String diet[] = diets[0].split("/");
+                String foodName = diet[0];
+                double amount = Double.parseDouble(diet[1]);
+
+                String foodInfo = ((MainActivity) MainActivity.mContext).selectFoodInfo2(foodName);
+                String nutrients[] = foodInfo.split("/");
+
+                kcal += Double.parseDouble(nutrients[1]) * amount;
+                carbohydrate += Double.parseDouble(nutrients[2]) * amount;
+                protein += Double.parseDouble(nutrients[3]) * amount;
+                fat += Double.parseDouble(nutrients[4]) * amount;
+                natrium += Double.parseDouble(nutrients[6]) * amount;
+                cholesterol += Double.parseDouble(nutrients[7]) * amount;
+            }
+        }
+        String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
+        kcalText.setText(textLine);
+        textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
+        carbohydrateText.setText(textLine);
+        textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
+        proteinText.setText(textLine);
+        textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
+        fatText.setText(textLine);
+        textLine = (int)natrium + " / " + ProfileFragment.NATRIUM_BOUND;
+        natriumText.setText(textLine);
+        textLine = (int)carbohydrate + " / " + ProfileFragment.CHOLESTEROL_BOUND;
+        cholesterolText.setText(textLine);
     }
 
     /*

@@ -134,7 +134,7 @@ public class DietFragment extends Fragment {
         final TextView mycal = (TextView) container2.findViewById(R.id.myCal);
 
         //adapter 생성 및 지정
-        final testAdapter adapter = new testAdapter(MainActivity.mContext,R.layout.test_item,items) ;
+        final testAdapter adapter = new testAdapter(MainActivity.mContext,R.layout.test_item,items);
         listview.setAdapter(adapter) ;
 
         // detection으로 인한 음식 add

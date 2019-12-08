@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -35,18 +36,18 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     // 미플린 세인트 지어 방정식
-    final static double WEIGHT_FACTOR = 10;
-    final static double HEIGHT_FACTOR = 6.25;
-    final static int AGE_FACTOR = 5;
-    final static int MALE_BIAS = 5;
-    final static int FEMALE_BIAS = -161;
-    final static double[] ACTIVITY_LEVEL = {1.2, 1.375, 1.55, 1.725, 1.9};
-    final static double CARBOHYDRATE_FACTOR = 0.6 / 4.0;
-    final static double PROTEIN_FACTOR = 0.8;
-    final static double FAT_FACTOR = 0.175 / 9.0;
+    public final static double WEIGHT_FACTOR = 10;
+    public final static double HEIGHT_FACTOR = 6.25;
+    public final static int AGE_FACTOR = 5;
+    public final static int MALE_BIAS = 5;
+    public final static int FEMALE_BIAS = -161;
+    public final static double[] ACTIVITY_LEVEL = {1.2, 1.375, 1.55, 1.725, 1.9};
+    public final static double CARBOHYDRATE_FACTOR = 0.6 / 4.0;
+    public final static double PROTEIN_FACTOR = 0.8;
+    public final static double FAT_FACTOR = 0.175 / 9.0;
     // 단위: mg
-    final static int NATRIUM_BOUND = 2000;
-    final static int CHOLESTEROL_BOUND = 300;
+    public final static int NATRIUM_BOUND = 2000;
+    public final static int CHOLESTEROL_BOUND = 300;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -170,11 +171,6 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
-
-
-
         return root;
     }
-
 }
