@@ -2,8 +2,12 @@ package com.example.kcalmera.ui.profile;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,10 +103,9 @@ public class ProfileFragment extends Fragment {
 
                 }
 
-                /**
+                /*
                  * 권장 영양 성분 및 음식 추천
                  */
-
                 final int AGE = Integer.parseInt(textViewAge.getText().toString());
                 final double HEIGHT = Double.parseDouble(textViewHeight.getText().toString());
                 final double WEIGHT = Double.parseDouble(textViewWeight.getText().toString());

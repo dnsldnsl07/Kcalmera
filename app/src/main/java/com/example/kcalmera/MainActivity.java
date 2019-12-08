@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
@@ -18,6 +19,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,6 +166,7 @@ public class MainActivity extends FragmentActivity {
                 }
             }
         });
+
     }
 
     PermissionListener permissionListener = new PermissionListener() {

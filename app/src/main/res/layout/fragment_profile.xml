@@ -57,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 2000"
                         android:textSize="23sp" />
 
@@ -84,6 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 200"
                         android:textSize="23sp" />
 
@@ -111,6 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 55"
                         android:textSize="23dp" />
 
@@ -138,6 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 50"
                         android:textSize="23dp" />
 
@@ -165,6 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 2000"
                         android:textSize="23dp" />
 
@@ -192,6 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
+                        android:bufferType="spannable"
                         android:text="0 / 300"
                         android:textSize="23dp" />
 
