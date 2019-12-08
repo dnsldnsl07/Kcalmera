@@ -160,18 +160,33 @@ public class ProfileFragment extends Fragment {
 
                 String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
                 kcalText.setText(textLine);
+                Spannable span = (Spannable) kcalText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
                 carbohydrateText.setText(textLine);
+                span = (Spannable) carbohydrateText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
                 proteinText.setText(textLine);
+                span = (Spannable) proteinText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
                 fatText.setText(textLine);
+                span = (Spannable) fatText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 textLine = (int)natrium + " / " + NATRIUM_BOUND;
                 natriumText.setText(textLine);
+                span = (Spannable) natriumText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 textLine = (int)cholesterol + " / " + CHOLESTEROL_BOUND;
                 cholesterolText.setText(textLine);
-
-
+                span = (Spannable) cholesterolText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         });
         return root;
