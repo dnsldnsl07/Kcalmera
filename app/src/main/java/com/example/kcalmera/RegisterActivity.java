@@ -32,17 +32,27 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText nameText = (EditText) findViewById(R.id.nameText);
                 final RadioGroup sexSelect = (RadioGroup) findViewById(R.id.sexGroup);
+                final RadioGroup actSelect = (RadioGroup) findViewById(R.id.actGroup);
                 String sexText = new String();
                 EditText ageText = (EditText) findViewById(R.id.ageText);
                 EditText heightText = (EditText) findViewById(R.id.heightText);
                 EditText weightText = (EditText) findViewById(R.id.weightText);
                 int id = sexSelect.getCheckedRadioButtonId();
-
                 if(id == R.id.mButton){
                     sexText="남성";
                 }
                 else{
                     sexText="여성";
+                }
+
+                String exer=new String();
+                id = actSelect.getCheckedRadioButtonId();
+                switch (id){
+                    case R.id.actButton1 : exer="거의 하지 않음"; break;
+                    case R.id.actButton2 : exer="주1~2회정도"; break;
+                    case R.id.actButton3 : exer="주3~4회정도"; break;
+                    case R.id.actButton4 : exer="주5회이상"; break;
+                    case R.id.actButton5 : exer="전문 운동선수";
                 }
 
                 //Toast.makeText(getApplicationContext(),sexText,Toast.LENGTH_SHORT).show();
@@ -51,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String age = new String(ageText.getText().toString());
                 final String height = new String(heightText.getText().toString());
                 final String weight = new String(weightText.getText().toString());
+                final String exercise = new String(exer);
 
                 SharedPreferences pref = getSharedPreferences("register",MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
@@ -66,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                 //File fileDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "MyDocApp");
                 File fileDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
                 File file = new File(fileDir.getPath() + File.separator + "profile.txt");
-                FileWriter fw = null ;
+                FileWriter fw = null;
                 BufferedWriter bufwr = null ;
                 try {
                     fw = new FileWriter(file) ;
@@ -76,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                     bufwr.write(age+"\n");
                     bufwr.write(height+"\n");
                     bufwr.write(weight+"\n");
+                    bufwr.write(exercise+"\n");
                     bufwr.flush() ;
                 } catch (Exception e) {
                     e.printStackTrace() ;

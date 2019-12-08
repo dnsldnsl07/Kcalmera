@@ -320,14 +320,7 @@
                 android:singleLine="true"
                 android:text="남성"
                 android:textSize="17dp" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/customborder"
-            android:orientation="horizontal"
-            android:padding="5dp">
 
             <TextView
                 android:id="@+id/ageText"
@@ -335,6 +328,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/sexText"
                 android:gravity="right"
+                android:layout_marginStart="95dp"
                 android:text="나이  "
                 android:textSize="20dp" />
 
@@ -395,14 +389,6 @@
                 android:layout_height="wrap_content"
                 android:text="Cm"
                 android:textSize="17dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/customborder"
-            android:orientation="horizontal"
-            android:padding="5dp">
 
             <TextView
                 android:id="@+id/weightText"
@@ -410,6 +396,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/heightText"
                 android:gravity="right"
+                android:layout_marginStart="90dp"
                 android:text="몸무게  "
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -435,6 +422,36 @@
                 android:textSize="17dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/exerciseText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/weightText"
+                android:gravity="right"
+                android:text="운동  "
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightText" />
+
+            <EditText
+                android:id="@+id/exerciseText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:focusableInTouchMode="false"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:singleLine="true"
+                android:text="거의 하지 않음"
+                android:textSize="17dp" />
+        </LinearLayout>
 
     </LinearLayout>
 

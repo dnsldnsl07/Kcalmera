@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
         final TextView textViewAge = root.findViewById(R.id.ageText2);
         final TextView textViewHeight = root.findViewById(R.id.heightText2);
         final TextView textViewWeight = root.findViewById(R.id.weightText2);
+        final TextView textViewExercise = root.findViewById(R.id.exerciseText2);
         profileViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -77,25 +78,21 @@ public class ProfileFragment extends Fragment {
                 {
 
                 }
-                String name = new String();
-                String sex = new String();
-                String age = new String();
-                String ht = new String();
-                String wt = new String();
 
                 //
                 try {
                     s = br.readLine();
-                    textViewName.setText(name.concat(s));
+                    textViewName.setText(s);
                     s = br.readLine();
-                    textViewSex.setText(sex.concat(s));
+                    textViewSex.setText(s);
                     s = br.readLine();
-                    textViewAge.setText(age.concat(s));
+                    textViewAge.setText(s);
                     s = br.readLine();
-                    textViewHeight.setText(ht.concat(s));
+                    textViewHeight.setText(s);
                     s = br.readLine();
-                    textViewWeight.setText(wt.concat(s));
-
+                    textViewWeight.setText(s);
+                    s = br.readLine();
+                    textViewExercise.setText(s);
                     br.close();
                 }
                 catch(Exception e)
@@ -115,7 +112,15 @@ public class ProfileFragment extends Fragment {
                 final double BMR = WEIGHT_FACTOR * WEIGHT + HEIGHT_FACTOR * HEIGHT - AGE_FACTOR * AGE
                                     + (SEX.equals("남성")? MALE_BIAS : FEMALE_BIAS);
                 // TO DO: 활동 레벨 구현 필요
-                final double RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[1];
+                double RECOMMENDED_KCAL = 0;
+                switch(textViewExercise.getText().toString()){
+                    case "거의 하지 않음" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[0]; break;
+                    case "주1~2회정도" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[1]; break;
+                    case "주3~4회정도" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[2]; break;
+                    case "주5회이상" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[3]; break;
+                    case "전문 운동선수" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[4]; break;
+                }
+
                 final double RECOMMENDED_PROTEIN = WEIGHT * PROTEIN_PER_WEIGHT;
                 final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_PROTEIN * CARBOHYDRATE_FACTOR;
                 final double RECOMMENDED_FAT = RECOMMENDED_PROTEIN * FAT_FACTOR;
