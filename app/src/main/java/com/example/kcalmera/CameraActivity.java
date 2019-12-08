@@ -82,7 +82,7 @@ public class CameraActivity extends Activity {
     private Surface surface;
     private ImageReader reader;
     private String cameraId;
-    private boolean cap;
+    private  boolean cap;
 
     private DisplayMetrics displayMetrics = new DisplayMetrics();
     int DSI_height;
@@ -382,12 +382,14 @@ public class CameraActivity extends Activity {
             public void onClick(View arg0) {
                 Log.e(TAG, "ConfirmButton clicked");
 
-                Intent intent = new Intent();
-                intent.putExtra("INPUT_TEXT",setOfResults);
-                setResult(RESULT_OK,intent);
+                if (semaphore == false){
+                    Intent intent = new Intent();
+                intent.putExtra("INPUT_TEXT", setOfResults);
+                setResult(RESULT_OK, intent);
                 setOfResults = "";
                 semaphore = false;
                 finish();
+                 }
             }
         }); //버튼에 OnClickListener를 지정(OnClickListener)
 
