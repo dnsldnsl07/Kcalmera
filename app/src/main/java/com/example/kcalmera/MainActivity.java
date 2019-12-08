@@ -8,7 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -315,7 +317,7 @@ public class MainActivity extends FragmentActivity {
     */
 
     static public Bitmap resizeBitmap(Bitmap original) {
-
+        /*
         int resizeWidth = ImageClassifier.DIM_IMG_SIZE_X;
 
         double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
@@ -326,6 +328,34 @@ public class MainActivity extends FragmentActivity {
             original.recycle();
         }
         return result;
+        */
+        int width = original.getWidth();
+        int height = original.getHeight();
+        Bitmap squaredImage;
+        if (width < height) {
+            squaredImage = Bitmap.createBitmap(original, 0, (height - width) / 2, width, width);
+        }
+        else {
+            squaredImage = Bitmap.createBitmap(original, (width - height) / 2, 0, height, height);
+        }
+
+        int newWidth = ImageClassifier.DIM_IMG_SIZE_X, newHeight = ImageClassifier.DIM_IMG_SIZE_Y;
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+
+        float ratioX = newWidth / (float) squaredImage.getWidth();
+        float ratioY = newHeight / (float) squaredImage.getHeight();
+        float pivotX = 0;
+        float pivotY = 0;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, pivotX, pivotY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(squaredImage, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
     }
 
     //database
@@ -506,6 +536,7 @@ public class MainActivity extends FragmentActivity {
         else
             str = null;
 
+        c.close();
         return str;
     }
 
@@ -520,6 +551,7 @@ public class MainActivity extends FragmentActivity {
         else
             str = null;
 
+        c.close();
         return str;
     }
 
