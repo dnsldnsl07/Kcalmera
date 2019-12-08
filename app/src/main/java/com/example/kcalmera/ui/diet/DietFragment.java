@@ -190,7 +190,7 @@ public class DietFragment extends Fragment {
                 final AddView addView = new AddView(MainActivity.mContext);
                 alert.setView(addView);
 
-                String[] FOOD = { "백김치", "밥", "불고기", "닭갈비", "된장찌개", "후라이드 치킨", "감자채볶음", "간장게장", "김밥", "고등어구이",
+                String[] FOOD = { "백김치", "밥", "불고기", "닭갈비", "된장찌개", "후라이드치킨", "감자채볶음", "간장게장", "김밥", "고등어구이",
                         "곰탕", "계란후라이", "계란찜", "계란말이", "잡채", "제육볶음", "짜장면", "짬뽕", "김치", "김치찌개", "깍두기",
                         "만두", "미역국", "피자", "라면", "삼겹살", "시금치나물", "순대", "떡볶이", "양념치킨"};
                 addView.addFoodEditView.setAdapter(new ArrayAdapter<String>(getActivity(),
