@@ -132,7 +132,7 @@ public class ProfileFragment extends Fragment {
                 String diets[] = dietString.split("\n");
                 if (!diets[0].equals("")) { // else: 식단 없음
                     for (int i = 0; i < diets.length; ++i) {
-                        String diet[] = diets[0].split("/");
+                        String diet[] = diets[i].split("/");
                         String foodName = diet[0];
                         double amount = Double.parseDouble(diet[1]);
 
@@ -168,7 +168,7 @@ public class ProfileFragment extends Fragment {
                 fatText.setText(textLine);
                 textLine = (int)natrium + " / " + NATRIUM_BOUND;
                 natriumText.setText(textLine);
-                textLine = (int)carbohydrate + " / " + CHOLESTEROL_BOUND;
+                textLine = (int)cholesterol + " / " + CHOLESTEROL_BOUND;
                 cholesterolText.setText(textLine);
 
 
