@@ -46,9 +46,9 @@ public class ProfileFragment extends Fragment {
     public final static int MALE_BIAS = 5;
     public final static int FEMALE_BIAS = -161;
     public final static double[] ACTIVITY_LEVEL = {1.2, 1.375, 1.55, 1.725, 1.9};
-    public final static double CARBOHYDRATE_FACTOR = 0.6 / 4.0;
-    public final static double PROTEIN_FACTOR = 0.8;
-    public final static double FAT_FACTOR = 0.175 / 9.0;
+    public final static double PROTEIN_PER_WEIGHT = 0.8;
+    public final static double CARBOHYDRATE_FACTOR = 11.0 / 4.0;
+    public final static double FAT_FACTOR = 5.0 / 9.0;
     // 단위: mg
     public final static int NATRIUM_BOUND = 2000;
     public final static int CHOLESTEROL_BOUND = 300;
@@ -116,9 +116,9 @@ public class ProfileFragment extends Fragment {
                                     + (SEX.equals("남성")? MALE_BIAS : FEMALE_BIAS);
                 // TO DO: 활동 레벨 구현 필요
                 final double RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[1];
-                final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_KCAL * CARBOHYDRATE_FACTOR;
-                final double RECOMMENDED_PROTEIN = WEIGHT * PROTEIN_FACTOR;
-                final double RECOMMENDED_FAT = RECOMMENDED_KCAL * FAT_FACTOR;
+                final double RECOMMENDED_PROTEIN = WEIGHT * PROTEIN_PER_WEIGHT;
+                final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_PROTEIN * CARBOHYDRATE_FACTOR;
+                final double RECOMMENDED_FAT = RECOMMENDED_PROTEIN * FAT_FACTOR;
 
                 // 오늘 식단 탐색
                 double kcal = 0, carbohydrate = 0, protein = 0, fat = 0, natrium = 0, cholesterol = 0;

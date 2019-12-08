@@ -329,9 +329,10 @@ public class MainActivity extends FragmentActivity {
                 + (SEX.equals("남성")? ProfileFragment.MALE_BIAS : ProfileFragment.FEMALE_BIAS);
         // TO DO: 활동 레벨 구현 필요
         final double RECOMMENDED_KCAL = BMR * ProfileFragment.ACTIVITY_LEVEL[1];
-        final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_KCAL * ProfileFragment.CARBOHYDRATE_FACTOR;
-        final double RECOMMENDED_PROTEIN = WEIGHT * ProfileFragment.PROTEIN_FACTOR;
-        final double RECOMMENDED_FAT = RECOMMENDED_KCAL * ProfileFragment.FAT_FACTOR;
+        final double RECOMMENDED_PROTEIN = WEIGHT * ProfileFragment.PROTEIN_PER_WEIGHT;
+        final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_PROTEIN * ProfileFragment.CARBOHYDRATE_FACTOR;
+        final double RECOMMENDED_FAT = RECOMMENDED_PROTEIN * ProfileFragment.FAT_FACTOR;
+
         double kcal = 0, carbohydrate = 0, protein = 0, fat = 0, natrium = 0, cholesterol = 0;
         TextView kcalText = (TextView) findViewById(R.id.kcal);
         TextView carbohydrateText = (TextView) findViewById(R.id.carbohydrate);
