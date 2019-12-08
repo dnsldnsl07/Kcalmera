@@ -7,18 +7,18 @@
 
 
     <TextView
-        android:id="@+id/registerInfo"
+        android:id="@+id/editInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="55dp"
         android:layout_marginBottom="50dp"
-        android:text="사용자 정보를 등록해주세요."
+        android:text="사용자 정보 수정"
         android:textSize="24sp" />
 
 
     <RadioGroup
-        android:id="@+id/sexGroup"
+        android:id="@+id/sexGroupE"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,14 +26,14 @@
         android:checkedButton="@+id/mButton">
 
         <RadioButton
-            android:id="@+id/mButton"
+            android:id="@+id/mButtonE"
             android:layout_width="69dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="남성" />
 
         <RadioButton
-            android:id="@+id/feButton"
+            android:id="@+id/feButtonE"
             android:layout_width="69dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -43,7 +43,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/nameText"
+        android:id="@+id/nameTextE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -53,7 +53,7 @@
 
 
     <EditText
-        android:id="@+id/ageText"
+        android:id="@+id/ageTextE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -64,7 +64,7 @@
         android:inputType="number"/>
 
     <EditText
-        android:id="@+id/heightText"
+        android:id="@+id/heightTextE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -75,7 +75,7 @@
         android:inputType="numberDecimal"/>
 
     <EditText
-        android:id="@+id/weightText"
+        android:id="@+id/weightTextE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -86,7 +86,7 @@
         android:inputType="numberDecimal"/>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/editInfo2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -96,54 +96,44 @@
         android:textSize="20dp" />
 
     <RadioGroup
-        android:id="@+id/actGroup"
+        android:id="@+id/actGroupE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
         <RadioButton
-            android:id="@+id/actButton1"
+            android:id="@+id/actButton1E"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="거의 하지 않음" />
 
         <RadioButton
-            android:id="@+id/actButton2"
+            android:id="@+id/actButton2E"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="주1~2회정도" />
 
         <RadioButton
-            android:id="@+id/actButton3"
+            android:id="@+id/actButton3E"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="주3~4회정도" />
 
         <RadioButton
-            android:id="@+id/actButton4"
+            android:id="@+id/actButton4E"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="주5회이상" />
 
         <RadioButton
-            android:id="@+id/actButton5"
+            android:id="@+id/actButton5E"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:text="전문 운동선수" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weightText"
-        android:layout_gravity="center_horizontal"
-        android:text="확인" />
-
-
 </LinearLayout>

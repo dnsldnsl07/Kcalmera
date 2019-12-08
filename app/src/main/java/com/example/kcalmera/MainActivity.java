@@ -3,6 +3,7 @@ package com.example.kcalmera;
 import android.Manifest;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -36,6 +37,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kcalmera.ui.diet.AddView;
 import com.example.kcalmera.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gun0912.tedpermission.PermissionListener;
@@ -53,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NavUtils;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -238,21 +241,37 @@ public class MainActivity extends FragmentActivity {
         }
     }
     public void onClickEdit(View v) {
-        EditText name = (EditText) findViewById(R.id.nameText2);
-        EditText sex = (EditText) findViewById(R.id.sexText2);
-        EditText age = (EditText) findViewById(R.id.ageText2);
-        EditText ht = (EditText) findViewById(R.id.heightText2);
-        EditText wt = (EditText) findViewById(R.id.weightText2);
-        Button edit = (Button) findViewById(R.id.edit_button);
-        Button confirm = (Button) findViewById(R.id.confirm_button);
+        View editView = getLayoutInflater().inflate(R.layout.profile_edit, null);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setView(editView);
 
-        name.setFocusableInTouchMode(true);
-        sex.setFocusableInTouchMode(true);
-        age.setFocusableInTouchMode(true);
-        ht.setFocusableInTouchMode(true);
-        wt.setFocusableInTouchMode(true);
-        edit.setVisibility(View.INVISIBLE);
-        confirm.setVisibility(View.VISIBLE);
+        EditText name = editView.findViewById(R.id.nameTextE);
+        EditText age = editView.findViewById(R.id.ageTextE);
+        EditText ht = editView.findViewById(R.id.heightTextE);
+        EditText wt = editView.findViewById(R.id.weightTextE);
+        final String name2 = ((EditText) findViewById(R.id.nameText2)).getText().toString();
+        final String age2 = ((EditText) findViewById(R.id.ageText2)).getText().toString();
+        final String ht2 = ((EditText) findViewById(R.id.heightText2)).getText().toString();
+        final String wt2 = ((EditText) findViewById(R.id.weightText2)).getText().toString();
+
+        name.setText(name2);
+        age.setText(age2);
+        ht.setText(ht2);
+        wt.setText(wt2);
+
+        // 확인버튼 선택
+        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.setNegativeButton("취소",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        alert.show();
     }
 
     public void onClickConfirm(View v) {
