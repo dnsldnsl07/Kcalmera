@@ -2,6 +2,7 @@ package com.example.kcalmera;
 
 import android.Manifest;
 import android.app.FragmentTransaction;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,7 +68,7 @@ import androidx.navigation.ui.NavigationUI;
 
 
 public class MainActivity extends FragmentActivity {
-    private static final int PROFILE_REQUEST_CODE=699, REQUEST_IMAGE_CAPTURE = 700;
+    private static final int PROFILE_REQUEST_CODE=699, REQUEST_IMAGE_CAPTURE = 700, REQUEST_FOOD_SET = 701;
     private String imageFilePath;
     private Uri photoUri;
     private static final String TAG = "TfLiteCameraDemo";
@@ -152,6 +153,10 @@ public class MainActivity extends FragmentActivity {
         findViewById(R.id.navigation_camera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivityForResult(intent,REQUEST_FOOD_SET);
+            }
+                /*
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     File photoFile = null;
@@ -168,6 +173,7 @@ public class MainActivity extends FragmentActivity {
                     }
                 }
             }
+            */
         });
 
     }
@@ -712,7 +718,10 @@ public class MainActivity extends FragmentActivity {
 
             }
         }
-
+        else if(requestCode == REQUEST_FOOD_SET && resultCode == RESULT_OK)
+        {
+            Log.e(TAG,data.getStringExtra("INPUT_TEXT"));
+        }
         //프로필 사진 설정
         /*
         else if(requestCode == PROFILE_REQUEST_CODE)

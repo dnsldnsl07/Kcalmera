@@ -36,7 +36,8 @@ public class ImageClassifier {
     private static final String LABEL_PATH = "labels.txt";
 
     /** Number of results to show in the UI. */
-    private static final int RESULTS_TO_SHOW = 3;
+    private static final int RESULTS_TO_SHOW = 1;
+
 
     /** Dimensions of inputs. */
     private static final int DIM_BATCH_SIZE = 1;
@@ -115,7 +116,7 @@ public class ImageClassifier {
 
         // print the results
         String textToShow = printTopKLabels();
-        textToShow = Long.toString(endTime - startTime) + "ms" + textToShow;
+        //textToShow = Long.toString(endTime - startTime) + "ms" + textToShow;
         return textToShow;
     }
 
@@ -208,11 +209,14 @@ public class ImageClassifier {
         }
         String textToShow = "";
         final int size = sortedLabels.size();
+
+
         for (int i = 0; i < size; ++i) {
             Map.Entry<String, Float> label = sortedLabels.poll();
-            textToShow = String.format("\n%s: %4.2f",translate(label.getKey()),label.getValue()) + textToShow;
-            MainActivity.Food = String.format("%s",translate(label.getKey()));
+            textToShow = String.format("%s %4.2f",translate(label.getKey()),label.getValue());
+            //MainActivity.Food = String.format("%s",translate(label.getKey()));
         }
+
         return textToShow;
     }
 

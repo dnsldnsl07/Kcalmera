@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".RegisterActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".CameraActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:authorities="com.example.kcalmera"
