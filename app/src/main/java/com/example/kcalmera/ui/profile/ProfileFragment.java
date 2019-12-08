@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +32,14 @@ import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -52,6 +59,14 @@ public class ProfileFragment extends Fragment {
     // 단위: mg
     public final static int NATRIUM_BOUND = 2000;
     public final static int CHOLESTEROL_BOUND = 300;
+    public final static String[] LOW_CARBOHYDRATE_FOODS = {"콩", "견과류", "아보카도"};
+    public final static String[] HIGH_CARBOHYDRATE_FOODS = {"잡곡밥", "통밀빵", "해조류"};
+    public final static String[] LOW_PROTEIN_FOODS = {"과일", "채소"};
+    public final static String[] HIGH_PROTEIN_FOODS = {"닭가슴살", "콩", "계란"};
+    public final static String[] LOW_FAT_FOODS = {"채소", "과일", "닭가슴살"};
+    public final static String[] HIGH_FAT_FOODS = {"견과류", "생선", "아보카도"};
+    public final static String[] LOW_CHOLESTEROL_FOODS = {"과일", "견과류", "콩", "생선"};
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -192,6 +207,113 @@ public class ProfileFragment extends Fragment {
                 cholesterolText.setText(textLine);
                 span = (Spannable) cholesterolText.getText();
                 span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                // 영양 분석 메시지 출력
+                boolean isKcalExceeded = (kcal > RECOMMENDED_KCAL);
+                boolean isCarbohydrateExceeded = (carbohydrate > RECOMMENDED_CARBOHYDRATE);
+                boolean isProteinExceeded = (protein > RECOMMENDED_PROTEIN);
+                boolean isFatExceeded = (fat > RECOMMENDED_FAT);
+                boolean isNatriumExceeded = (natrium > NATRIUM_BOUND);
+                boolean isCholesterolExceeded = (cholesterol > CHOLESTEROL_BOUND);
+
+                ArrayList<String> recommendationMsgs = new ArrayList<>();
+                if (isKcalExceeded) {
+                    recommendationMsgs.add("권장 칼로리 섭취량을 초과했습니다.");
+                }
+                if (isCarbohydrateExceeded) {
+                    recommendationMsgs.add("권장 탄수화물 섭취량을 초과했습니다.");
+                }
+                if (isProteinExceeded) {
+                    recommendationMsgs.add("권장 단백질 섭취량을 초과했습니다.");
+                }
+                if (isFatExceeded) {
+                    recommendationMsgs.add("권장 지방 섭취량을 초과했습니다.");
+                }
+                if (isNatriumExceeded) {
+                    recommendationMsgs.add("권장 나트륨 섭취량을 초과했습니다.");
+                }
+                if (isCholesterolExceeded) {
+                    recommendationMsgs.add("권장 콜레스테롤 섭취량을 초과했습니다.");
+                }
+
+                String recommendationMsg = null;
+                if (recommendationMsgs.size() == 0) {
+                    recommendationMsg = "특이 사항이 없습니다.";
+                } else {
+                    recommendationMsg = recommendationMsgs.get(0);
+                    for (int i = 1; i < recommendationMsgs.size(); ++i) {
+                        recommendationMsg = recommendationMsg.concat("\n" + recommendationMsgs.get(i));
+                    }
+                }
+
+                TextView recommendationMsgText = (TextView) root.findViewById(R.id.recommendationMsgText);
+                recommendationMsgText.setText(recommendationMsg);
+
+                // 음식 추천
+                /*
+                String foodList = null;
+                if (isCarbohydrateExceeded) {
+                    foodList = "저탄수화물 음식: " + TextUtils.join(" ", LOW_CARBOHYDRATE_FOODS);
+                } else {
+                    foodList = "고탄수화물 음식: " + TextUtils.join(" ", HIGH_CARBOHYDRATE_FOODS);
+                }
+
+                if (isProteinExceeded) {
+                    foodList += "\n저단백질 음식: " + TextUtils.join(" ", LOW_PROTEIN_FOODS);
+                } else {
+                    foodList += "\n고단백질 음식: " + TextUtils.join(" ", HIGH_PROTEIN_FOODS);
+                }
+
+                if (isFatExceeded) {
+                    foodList += "\n저지방 음식: " + TextUtils.join(" ", LOW_FAT_FOODS);
+                } else {
+                    foodList += "\n고지방 음식: " + TextUtils.join(" ", HIGH_FAT_FOODS);
+                }
+
+                if (isCholesterolExceeded) {
+                    foodList += "\n저콜레스테롤 음식: " + TextUtils.join(" ", LOW_CHOLESTEROL_FOODS);
+                }
+                */
+
+                HashSet<String> recommendedFood = new HashSet<>();
+                HashSet<String> restrictedFood = new HashSet<>();
+                if (isCarbohydrateExceeded) {
+                    Collections.addAll(restrictedFood, HIGH_CARBOHYDRATE_FOODS);
+                    Collections.addAll(recommendedFood, LOW_CARBOHYDRATE_FOODS);
+                } else {
+                    Collections.addAll(restrictedFood, LOW_CARBOHYDRATE_FOODS);
+                    Collections.addAll(recommendedFood, HIGH_CARBOHYDRATE_FOODS);
+                }
+
+                if (isProteinExceeded) {
+                    Collections.addAll(restrictedFood, HIGH_PROTEIN_FOODS);
+                    Collections.addAll(recommendedFood, LOW_PROTEIN_FOODS);
+                } else {
+                    Collections.addAll(restrictedFood, LOW_PROTEIN_FOODS);
+                    Collections.addAll(recommendedFood, HIGH_PROTEIN_FOODS);
+                }
+
+                if (isFatExceeded) {
+                    Collections.addAll(restrictedFood, HIGH_FAT_FOODS);
+                    Collections.addAll(recommendedFood, LOW_FAT_FOODS);
+                } else {
+                    Collections.addAll(restrictedFood, LOW_FAT_FOODS);
+                    Collections.addAll(recommendedFood, HIGH_FAT_FOODS);
+                }
+
+                if (isCholesterolExceeded) {
+                    Collections.addAll(recommendedFood, LOW_CHOLESTEROL_FOODS);
+                }
+
+                //Log.d("DEBUG", recommendedFood.toString());
+                recommendedFood.removeAll(restrictedFood);
+                //Log.d("DEBUG", recommendedFood.toString());
+                //Log.d("DEBUG", restrictedFood.toString());
+
+                TextView foodRecommendationText = (TextView) root.findViewById(R.id.foodRecommendationText);
+                foodRecommendationText.setText(recommendedFood.toString());
+
+
             }
         });
         return root;

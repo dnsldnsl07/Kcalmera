@@ -46,13 +46,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:orientation="vertical"
-            android:gravity="center">
+            >
 
             <LinearLayout
                 android:id="@+id/nutrients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -231,11 +233,19 @@
                 android:background="#AAAAAA" />
 
             <TextView
-                android:id="@+id/nutrientsMsgText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='"필요시 메시지가 출력됩니다."'
-                android:textSize="23sp"/>
+                android:text="특이 사항"
+                android:layout_gravity="center"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/recommendationMsgText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="권장 콜레스테롤 섭취량을 초과했습니다."
+                android:textSize="20sp"/>
 
             <View
                 android:layout_width="match_parent"
@@ -245,11 +255,19 @@
                 android:background="#AAAAAA" />
 
             <TextView
-                android:id="@+id/nutrientsRecommendText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n김치\n'
-                android:textSize="23sp"/>
+                android:text="추천 음식"
+                android:layout_gravity="center"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/foodRecommendationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text='저콜레스테롤\n과일 견과류 콩 생선'
+                android:textSize="20sp"/>
 
 
         </LinearLayout>
