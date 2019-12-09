@@ -178,6 +178,16 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
     PermissionListener permissionListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {

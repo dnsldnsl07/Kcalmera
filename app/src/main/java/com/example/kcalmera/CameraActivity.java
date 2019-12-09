@@ -96,6 +96,7 @@ public class CameraActivity extends Activity {
     private Button PictureButton;
 
     private String setOfResults;
+    public static String[] Food;
 
     private static final int MAX_PREVIEW_WIDTH = 1920;
     private static final int MAX_PREVIEW_HEIGHT = 1080;
@@ -386,8 +387,10 @@ public class CameraActivity extends Activity {
                     Intent intent = new Intent();
                 intent.putExtra("INPUT_TEXT", setOfResults);
                 setResult(RESULT_OK, intent);
+                Food = setOfResults.split("/");
                 setOfResults = "";
                 semaphore = false;
+                MainActivity.check = 1;
                 finish();
                  }
             }
@@ -859,7 +862,8 @@ public class CameraActivity extends Activity {
 
                         String[] tempArray = textToShow.split(" ");
                        // if(Double.parseDouble(tempArray[1]) <  0.3)
-                            Toast.makeText(CameraActivity.this, tempArray[0] + " 등록 실패", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(CameraActivity.this, tempArray[0] + " 등록 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT).show();
                         //else
                             setOfResults = setOfResults.concat(tempArray[0] + "/");
 

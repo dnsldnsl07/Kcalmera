@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+xmlns:android = "http://schemas.android.com/apk/res/android">
+<item
+    android:bottom="5dp"
+    android:left="5dp"
+    android:right="5dp"
+    android:top="5dp"
+    tools:ignore="ResourceCycle">
+    <shape
+        android:layout_height="wrap_content"
+        android:shape="oval">
+        <solid android:color="#EEC5C4C4" />
+    </shape>
+</item>
+<item>
+    <shape
+        android:shape="oval">
+        <stroke android:width="2dp"
+            android:color="#DBADACAC"/>
+    </shape>
+</item>
+</layer-list>

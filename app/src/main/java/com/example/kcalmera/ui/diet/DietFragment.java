@@ -1,5 +1,6 @@
 package com.example.kcalmera.ui.diet;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.kcalmera.CameraActivity;
 import com.example.kcalmera.MainActivity;
 import com.example.kcalmera.R;
 
@@ -139,41 +141,40 @@ public class DietFragment extends Fragment {
 
         // detection으로 인한 음식 add
         if(MainActivity.check == 1){
-            String foodName = MainActivity.Food;
-            String amount = "1";
-            String str=null;
-            String[] array = null;
-            String[] array2 = null;
-            String food_info = ((MainActivity) MainActivity.mContext).selectFoodInfo(foodName);
-            try {
-                if ((d[0] != curDayOfMonth) || (m[0] != curMonth+1) || (y[0] != curYear)){
-                    //2019-9-1 -> 2019-09-01 로 변환
-                    String t1 = "-";
-                    String t2 = "-";
-                    if(m[0] < 10)
-                        t1="-0";
-                    if(d[0] < 10)
-                        t2="-0";
-                    str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName, amount, "" + y[0] + t1 + m[0]  + t2 + d[0]);
-                } else
-                    str = ((MainActivity) MainActivity.mContext).insertRecord(foodName, amount);
+            String[] foodName = CameraActivity.Food;
+            for(int i=0; i<foodName.length;i++) {
+                String amount = "1";
+                String str = null;
+                String[] array = null;
+                String[] array2 = null;
+                String food_info = ((MainActivity) MainActivity.mContext).selectFoodInfo(foodName[i]);
+                try {
+                    if ((d[0] != curDayOfMonth) || (m[0] != curMonth + 1) || (y[0] != curYear)) {
+                        //2019-9-1 -> 2019-09-01 로 변환
+                        String t1 = "-";
+                        String t2 = "-";
+                        if (m[0] < 10)
+                            t1 = "-0";
+                        if (d[0] < 10)
+                            t2 = "-0";
+                        str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName[i], amount, "" + y[0] + t1 + m[0] + t2 + d[0]);
+                    } else
+                        str = ((MainActivity) MainActivity.mContext).insertRecord(foodName[i], amount);
+                } catch (Exception e) {
+                    Log.e("eee_add_pop_error", e.getMessage());
+                }
+                //식단 table과 음식정보 table에서 가져온 정보를 쪼갬
+                array2 = food_info.split("/");
+                array = str.split("/");
+
+                //list에 추가
+
+                items.add(new ItmStr(array[0], Double.parseDouble(array[1]), array[2], Integer.parseInt(array[3]), Double.parseDouble(array2[0]), Double.parseDouble(array2[1]), Double.parseDouble(array2[2]), Double.parseDouble(array2[3]), Double.parseDouble(array2[4])));
+                //총 영양소 정보 갱신
+                mycal.setText(sum(items));
+                //list view 갱신
+                adapter.notifyDataSetChanged();
             }
-            catch(Exception e)
-            {
-                Log.e("eee_add_pop_error",e.getMessage());
-            }
-            //식단 table과 음식정보 table에서 가져온 정보를 쪼갬
-            array2 = food_info.split("/");
-            array = str.split("/");
-
-            //list에 추가
-
-            items.add(new ItmStr(array[0], Double.parseDouble(array[1]), array[2], Integer.parseInt(array[3]), Double.parseDouble(array2[0]), Double.parseDouble(array2[1]), Double.parseDouble(array2[2]), Double.parseDouble(array2[3]), Double.parseDouble(array2[4])));
-            //총 영양소 정보 갱신
-            mycal.setText(sum(items));
-            //list view 갱신
-            adapter.notifyDataSetChanged();
-
             MainActivity.check=-1;
         }
 
