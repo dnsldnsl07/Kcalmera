@@ -862,7 +862,9 @@ public class CameraActivity extends Activity {
                         String[] tempArray = textToShow.split(" ");
                        // if(Double.parseDouble(tempArray[1]) <  0.3)
                             //Toast.makeText(CameraActivity.this, tempArray[0] + " 등록 실패", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,360);
+                        toast.show();
                         //else
                             setOfResults = setOfResults.concat(tempArray[0] + "/");
                             MainActivity.check=1;

@@ -191,7 +191,7 @@ public class ImageClassifier {
                 imgData.putFloat((((val >> 16) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
                 imgData.putFloat((((val >> 8) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
                 imgData.putFloat((((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
-                Log.d(TAG, "Value test: " + (((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
+                //Log.d(TAG, "Value test: " + (((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
             }
         }
         long endTime = SystemClock.uptimeMillis();
