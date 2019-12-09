@@ -82,7 +82,7 @@ public class CameraActivity extends Activity {
     private Surface surface;
     private ImageReader reader;
     private String cameraId;
-    private  boolean cap;
+    private boolean cap;
 
     private DisplayMetrics displayMetrics = new DisplayMetrics();
     int DSI_height;
@@ -390,7 +390,6 @@ public class CameraActivity extends Activity {
                 Food = setOfResults.split("/");
                 setOfResults = "";
                 semaphore = false;
-                MainActivity.check = 1;
                 finish();
                  }
             }
@@ -866,6 +865,7 @@ public class CameraActivity extends Activity {
                         Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT).show();
                         //else
                             setOfResults = setOfResults.concat(tempArray[0] + "/");
+                            MainActivity.check=1;
 
                         semaphore = false;
 

@@ -229,7 +229,7 @@ public class MainActivity extends FragmentActivity {
         matrix.postRotate(degree);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
-
+/*
     public void onClickAccept(View v) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         finish();
@@ -237,7 +237,7 @@ public class MainActivity extends FragmentActivity {
         Food = getFood.getText().toString();
         check=1;
         startActivity(intent);
-    }
+    }*/
 
     public void onClickCancel(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

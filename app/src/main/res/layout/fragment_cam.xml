@@ -11,7 +11,7 @@
         android:layout_height="45dp"
         android:layout_weight="1"
         android:background="#000000"
-        android:onClick="onClickAccept"
+
         android:text="확인"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
