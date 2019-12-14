@@ -94,6 +94,7 @@ public class DietFragment extends Fragment {
             fat+=amount*items.get(i).fat;
         }
 
+
         return String.format("＊오늘 섭취한 영양소 정보＊\n칼로리: %.1f kcal \n탄수화물: %.1fg   단백질: %.1fg   지방: %.1fg ",kcal,carbohydrate,protein,fat);
     }
 
@@ -390,7 +391,7 @@ public class DietFragment extends Fragment {
             Cursor c1 = ((MainActivity) MainActivity.mContext).selectRecord(curDate);
             String str_set = ((MainActivity) MainActivity.mContext).database_test(c1);
             String[] array_set = str_set.split("\n");
-            if (!array_set[0].equals("")) {
+            if (array_set[0].compareTo("") != 0) {
                 for (int i = 0; i < array_set.length; i++) {
                     String[] array = array_set[i].split("/");
                     String food_info = ((MainActivity) MainActivity.mContext).selectFoodInfo(array[0]);
@@ -402,6 +403,9 @@ public class DietFragment extends Fragment {
                 mycal.setText(sum(items));
                 adapter.notifyDataSetChanged();
             }
+            else
+                mycal.setText(sum(items));
+
             c1.close();
         }
         catch(Exception e)
@@ -436,13 +440,15 @@ public class DietFragment extends Fragment {
                 //선택된 날짜의 식단 table 내용 가져와서 list item 갱신
                 try {
                     items.clear();
-                    mycal.setText(sum(items));
+                    //mycal.setText(sum(items));
                     adapter.notifyDataSetChanged();
 
                     Cursor c1 = ((MainActivity) MainActivity.mContext).selectRecord(date);
                     String str_set = ((MainActivity) MainActivity.mContext).database_test(c1);
                     String[] array_set = str_set.split("\n");
-                    if (!array_set[0].equals("")) {
+
+                    //if (!array_set[0].equals("")) {
+                    if (array_set[0].compareTo("") != 0) {
                         for (int i = 0; i < array_set.length; i++) {
                             String[] array = array_set[i].split("/");
                             String food_info = ((MainActivity) MainActivity.mContext).selectFoodInfo(array[0]);
@@ -454,6 +460,8 @@ public class DietFragment extends Fragment {
                         mycal.setText(sum(items));
                         adapter.notifyDataSetChanged();
                     }
+                    else
+                        mycal.setText(sum(items));
                     c1.close();
                 }
                 catch(Exception e)
