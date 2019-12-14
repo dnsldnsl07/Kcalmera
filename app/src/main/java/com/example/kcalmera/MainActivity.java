@@ -34,6 +34,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,8 @@ import com.example.kcalmera.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -262,24 +266,201 @@ public class MainActivity extends FragmentActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setView(editView);
 
-        EditText name = editView.findViewById(R.id.nameTextE);
-        EditText age = editView.findViewById(R.id.ageTextE);
-        EditText ht = editView.findViewById(R.id.heightTextE);
-        EditText wt = editView.findViewById(R.id.weightTextE);
-        final String name2 = ((EditText) findViewById(R.id.nameText2)).getText().toString();
-        final String age2 = ((EditText) findViewById(R.id.ageText2)).getText().toString();
-        final String ht2 = ((EditText) findViewById(R.id.heightText2)).getText().toString();
-        final String wt2 = ((EditText) findViewById(R.id.weightText2)).getText().toString();
+        final EditText Name = editView.findViewById(R.id.nameTextE);
+        final EditText Age = editView.findViewById(R.id.ageTextE);
+        final EditText Ht = editView.findViewById(R.id.heightTextE);
+        final EditText Wt = editView.findViewById(R.id.weightTextE);
+        final RadioGroup sexSelect = editView.findViewById(R.id.sexGroupE);
+        RadioButton mButton = editView.findViewById(R.id.mButtonE);
+        RadioButton feButton = editView.findViewById(R.id.feButtonE);
+        final RadioGroup actSelect = editView.findViewById(R.id.actGroupE);
+        RadioButton actButton1 = editView.findViewById(R.id.actButton1E);
+        RadioButton actButton2 = editView.findViewById(R.id.actButton2E);
+        RadioButton actButton3 = editView.findViewById(R.id.actButton3E);
+        RadioButton actButton4 = editView.findViewById(R.id.actButton4E);
+        RadioButton actButton5 = editView.findViewById(R.id.actButton5E);
 
-        name.setText(name2);
-        age.setText(age2);
-        ht.setText(ht2);
-        wt.setText(wt2);
+        final String nameStr = ((EditText) findViewById(R.id.nameText2)).getText().toString();
+        final String sexStr = ((EditText) findViewById(R.id.sexText2)).getText().toString();
+        final String ageStr = ((EditText) findViewById(R.id.ageText2)).getText().toString();
+        final String htStr = ((EditText) findViewById(R.id.heightText2)).getText().toString();
+        final String wtStr = ((EditText) findViewById(R.id.weightText2)).getText().toString();
+        final String exerStr = ((EditText) findViewById(R.id.exerciseText2)).getText().toString();
+        Name.setText(nameStr);
+        Age.setText(ageStr);
+        Ht.setText(htStr);
+        Wt.setText(wtStr);
+        switch(sexStr) {
+            case "남성":
+                mButton.setChecked(true); break;
+            case "여성":
+                feButton.setChecked(true); break;
+        }
+        switch (exerStr){
+            case "거의 하지 않음": actButton1.setChecked(true); break;
+            case "주1~2회정도" : actButton2.setChecked(true); break;
+            case "주3~4회정도" : actButton3.setChecked(true); break;
+            case "주5회이상" : actButton4.setChecked(true); break;
+            case "전문 운동선수" : actButton5.setChecked(true); break;
+        }
 
         // 확인버튼 선택
         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                final String nameStr = Name.getText().toString();
+                final String ageStr = Age.getText().toString();
+                final String htStr = Ht.getText().toString();
+                final String wtStr = Wt.getText().toString();
+                String sexStr=new String();
+                String exerStr=new String();
+                int id = sexSelect.getCheckedRadioButtonId();
+                switch (id){
+                    case R.id.mButtonE : sexStr="남성"; break;
+                    case R.id.feButtonE : sexStr="여성"; break;
+                }
+                id=actSelect.getCheckedRadioButtonId();
+                switch (id){
+                    case R.id.actButton1E : exerStr="거의 하지 않음"; break;
+                    case R.id.actButton2E : exerStr="주1~2회정도"; break;
+                    case R.id.actButton3E : exerStr="주3~4회정도"; break;
+                    case R.id.actButton4E : exerStr="주5회이상"; break;
+                    case R.id.actButton5E : exerStr="전문 운동선수";
+                }
 
+                BufferedReader br = null;
+                try {
+                    br = new BufferedReader(new FileReader("/mnt/sdcard/Android/data/com.example.kcalmera/files/Documents/"+"profile.txt"));
+                }
+                catch (Exception e)
+                {
+
+                }
+                //File file = new File(getFilesDir(), "profile.txt") ;
+                File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath() + File.separator + "profile.txt");
+                FileWriter fw = null ;
+                BufferedWriter bufwr = null ;
+                try {
+                    fw = new FileWriter(file) ;
+                    bufwr = new BufferedWriter(fw) ;
+                    bufwr.write(nameStr+"\n");
+                    bufwr.write(sexStr+"\n");
+                    bufwr.write(ageStr+"\n");
+                    bufwr.write(htStr+"\n");
+                    bufwr.write(wtStr+"\n");
+                    bufwr.write(exerStr+"\n");
+                    bufwr.flush() ;
+                } catch (Exception e) {
+                    e.printStackTrace() ;
+                }
+                try {
+                    // close file.
+                    if (bufwr != null) {
+                        bufwr.close();
+                    }
+                    if (fw != null) {
+                        fw.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace() ;
+                }
+
+                final int AGE = Integer.parseInt(ageStr);
+                final double HEIGHT = Double.parseDouble(htStr);
+                final double WEIGHT = Double.parseDouble(wtStr);
+                final String SEX = sexStr;
+                // TO DO: 활동 레벨 구현
+                // 기초 대사율
+                final double BMR = ProfileFragment.WEIGHT_FACTOR * WEIGHT + ProfileFragment.HEIGHT_FACTOR * HEIGHT - ProfileFragment.AGE_FACTOR * AGE
+                        + (SEX.equals("남성")? ProfileFragment.MALE_BIAS : ProfileFragment.FEMALE_BIAS);
+                // TO DO: 활동 레벨 구현 필요
+                double[] ACTIVITY_LEVEL = {1.2, 1.375, 1.55, 1.725, 1.9};
+                double RECOMMENDED_KCAL=0;
+                switch(exerStr){
+                    case "거의 하지 않음" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[0]; break;
+                    case "주1~2회정도" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[1]; break;
+                    case "주3~4회정도" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[2]; break;
+                    case "주5회이상" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[3]; break;
+                    case "전문 운동선수" : RECOMMENDED_KCAL = BMR * ACTIVITY_LEVEL[4]; break;
+                }
+                final double RECOMMENDED_PROTEIN = WEIGHT * ProfileFragment.PROTEIN_PER_WEIGHT;
+                final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_PROTEIN * ProfileFragment.CARBOHYDRATE_FACTOR;
+                final double RECOMMENDED_FAT = RECOMMENDED_PROTEIN * ProfileFragment.FAT_FACTOR;
+
+                double kcal = 0, carbohydrate = 0, protein = 0, fat = 0, natrium = 0, cholesterol = 0;
+                TextView kcalText = (TextView) findViewById(R.id.kcal);
+                TextView carbohydrateText = (TextView) findViewById(R.id.carbohydrate);
+                TextView proteinText = (TextView) findViewById(R.id.protein);
+                TextView fatText = (TextView) findViewById(R.id.fat);
+                TextView natriumText = (TextView) findViewById(R.id.natrium);
+                TextView cholesterolText = (TextView) findViewById(R.id.cholesterol);
+
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String curDate = format.format(calendar.getTime());
+                Cursor cursor = ((MainActivity) MainActivity.mContext).selectRecord(curDate);
+                String dietString = ((MainActivity) MainActivity.mContext).database_test(cursor);
+                String diets[] = dietString.split("\n");
+
+                if (!diets[0].equals("")) { // else: 식단 없음
+                    for (int i = 0; i < diets.length; ++i) {
+                        String diet[] = diets[i].split("/");
+                        String foodName = diet[0];
+                        double amount = Double.parseDouble(diet[1]);
+
+                        String foodInfo = ((MainActivity) MainActivity.mContext).selectFoodInfo2(foodName);
+                        String nutrients[] = foodInfo.split("/");
+
+                        kcal += Double.parseDouble(nutrients[1]) * amount;
+                        carbohydrate += Double.parseDouble(nutrients[2]) * amount;
+                        protein += Double.parseDouble(nutrients[3]) * amount;
+                        fat += Double.parseDouble(nutrients[4]) * amount;
+                        natrium += Double.parseDouble(nutrients[6]) * amount;
+                        cholesterol += Double.parseDouble(nutrients[7]) * amount;
+                    }
+                }
+                String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
+                kcalText.setText(textLine);
+                Spannable span = (Spannable) kcalText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
+                carbohydrateText.setText(textLine);
+                span = (Spannable) carbohydrateText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
+                proteinText.setText(textLine);
+                span = (Spannable) proteinText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
+                fatText.setText(textLine);
+                span = (Spannable) fatText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                textLine = (int)natrium + " / " + ProfileFragment.NATRIUM_BOUND;
+                natriumText.setText(textLine);
+                span = (Spannable) natriumText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                textLine = (int)cholesterol + " / " + ProfileFragment.CHOLESTEROL_BOUND;
+                cholesterolText.setText(textLine);
+                span = (Spannable) cholesterolText.getText();
+                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                final TextView textViewName = findViewById(R.id.nameText2);
+                final TextView textViewSex = findViewById(R.id.sexText2);
+                final TextView textViewAge = findViewById(R.id.ageText2);
+                final TextView textViewHeight = findViewById(R.id.heightText2);
+                final TextView textViewWeight = findViewById(R.id.weightText2);
+                final TextView textViewExercise = findViewById(R.id.exerciseText2);
+
+                textViewName.setText(nameStr);
+                textViewSex.setText(sexStr);
+                textViewAge.setText(ageStr);
+                textViewHeight.setText(htStr);
+                textViewWeight.setText(wtStr);
+                textViewExercise.setText(exerStr);
             }
         });
 
@@ -290,156 +471,6 @@ public class MainActivity extends FragmentActivity {
         });
         alert.show();
     }
-
-    public void onClickConfirm(View v) {
-        EditText Name = (EditText) findViewById(R.id.nameText2);
-        EditText Sex = (EditText) findViewById(R.id.sexText2);
-        EditText Age = (EditText) findViewById(R.id.ageText2);
-        EditText Height = (EditText) findViewById(R.id.heightText2);
-        EditText Weight = (EditText) findViewById(R.id.weightText2);
-        Button Edit = (Button) findViewById(R.id.edit_button);
-        Button Confirm = (Button) findViewById(R.id.confirm_button);
-
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("/mnt/sdcard/Android/data/com.example.kcalmera/files/Documents/"+"profile.txt"));
-        }
-        catch (Exception e)
-        {
-
-        }
-        String s = new String();
-        String name = new String(Name.getText().toString());
-        String sex = new String(Sex.getText().toString());
-        String age = new String(Age.getText().toString());
-        String height = new String(Height.getText().toString());
-        String weight = new String(Weight.getText().toString());
-
-        //File file = new File(getFilesDir(), "profile.txt") ;
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath() + File.separator + "profile.txt");
-        FileWriter fw = null ;
-        BufferedWriter bufwr = null ;
-        try {
-            fw = new FileWriter(file) ;
-            bufwr = new BufferedWriter(fw) ;
-            bufwr.write(name+"\n");
-            bufwr.write(sex+"\n");
-            bufwr.write(age+"\n");
-            bufwr.write(height+"\n");
-            bufwr.write(weight+"\n");
-            bufwr.flush() ;
-        } catch (Exception e) {
-            e.printStackTrace() ;
-        }
-        try {
-            // close file.
-            if (bufwr != null) {
-                bufwr.close();
-            }
-            if (fw != null) {
-                fw.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace() ;
-        }
-        Name.setFocusable(false);
-        Name.setFocusableInTouchMode(false);
-        Sex.setFocusable(false);
-        Sex.setFocusableInTouchMode(false);
-        Age.setFocusable(false);
-        Age.setFocusableInTouchMode(false);
-        Height.setFocusable(false);
-        Height.setFocusableInTouchMode(false);
-        Weight.setFocusable(false);
-        Weight.setFocusableInTouchMode(false);
-        Edit.setVisibility(View.VISIBLE);
-        Confirm.setVisibility(View.INVISIBLE);
-
-        final int AGE = Integer.parseInt(Age.getText().toString());
-        final double HEIGHT = Double.parseDouble(Height.getText().toString());
-        final double WEIGHT = Double.parseDouble(Weight.getText().toString());
-        final String SEX = Sex.getText().toString();
-        // TO DO: 활동 레벨 구현
-        // 기초 대사율
-        final double BMR = ProfileFragment.WEIGHT_FACTOR * WEIGHT + ProfileFragment.HEIGHT_FACTOR * HEIGHT - ProfileFragment.AGE_FACTOR * AGE
-                + (SEX.equals("남성")? ProfileFragment.MALE_BIAS : ProfileFragment.FEMALE_BIAS);
-        // TO DO: 활동 레벨 구현 필요
-        final double RECOMMENDED_KCAL = BMR * ProfileFragment.ACTIVITY_LEVEL[1];
-        final double RECOMMENDED_PROTEIN = WEIGHT * ProfileFragment.PROTEIN_PER_WEIGHT;
-        final double RECOMMENDED_CARBOHYDRATE = RECOMMENDED_PROTEIN * ProfileFragment.CARBOHYDRATE_FACTOR;
-        final double RECOMMENDED_FAT = RECOMMENDED_PROTEIN * ProfileFragment.FAT_FACTOR;
-
-        double kcal = 0, carbohydrate = 0, protein = 0, fat = 0, natrium = 0, cholesterol = 0;
-        TextView kcalText = (TextView) findViewById(R.id.kcal);
-        TextView carbohydrateText = (TextView) findViewById(R.id.carbohydrate);
-        TextView proteinText = (TextView) findViewById(R.id.protein);
-        TextView fatText = (TextView) findViewById(R.id.fat);
-        TextView natriumText = (TextView) findViewById(R.id.natrium);
-        TextView cholesterolText = (TextView) findViewById(R.id.cholesterol);
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String curDate = format.format(calendar.getTime());
-        Cursor cursor = ((MainActivity) MainActivity.mContext).selectRecord(curDate);
-        String dietString = ((MainActivity) MainActivity.mContext).database_test(cursor);
-        String diets[] = dietString.split("\n");
-
-        if (!diets[0].equals("")) { // else: 식단 없음
-            for (int i = 0; i < diets.length; ++i) {
-                String diet[] = diets[i].split("/");
-                String foodName = diet[0];
-                double amount = Double.parseDouble(diet[1]);
-
-                String foodInfo = ((MainActivity) MainActivity.mContext).selectFoodInfo2(foodName);
-                String nutrients[] = foodInfo.split("/");
-
-                kcal += Double.parseDouble(nutrients[1]) * amount;
-                carbohydrate += Double.parseDouble(nutrients[2]) * amount;
-                protein += Double.parseDouble(nutrients[3]) * amount;
-                fat += Double.parseDouble(nutrients[4]) * amount;
-                natrium += Double.parseDouble(nutrients[6]) * amount;
-                cholesterol += Double.parseDouble(nutrients[7]) * amount;
-            }
-        }
-        String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
-        kcalText.setText(textLine);
-        Spannable span = (Spannable) kcalText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
-        carbohydrateText.setText(textLine);
-        span = (Spannable) carbohydrateText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
-        proteinText.setText(textLine);
-        span = (Spannable) proteinText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
-        fatText.setText(textLine);
-        span = (Spannable) fatText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textLine = (int)natrium + " / " + ProfileFragment.NATRIUM_BOUND;
-        natriumText.setText(textLine);
-        span = (Spannable) natriumText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        textLine = (int)cholesterol + " / " + ProfileFragment.CHOLESTEROL_BOUND;
-        cholesterolText.setText(textLine);
-        span = (Spannable) cholesterolText.getText();
-        span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-    }
-
-    /*
-    public void setProfile(View v){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intent, PROFILE_REQUEST_CODE);
-    }
-    */
 
     static public Bitmap resizeBitmap(Bitmap original) {
         /*
