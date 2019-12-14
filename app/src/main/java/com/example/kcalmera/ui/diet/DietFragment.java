@@ -171,10 +171,10 @@ public class DietFragment extends Fragment {
 
                 items.add(new ItmStr(array[0], Double.parseDouble(array[1]), array[2], Integer.parseInt(array[3]), Double.parseDouble(array2[0]), Double.parseDouble(array2[1]), Double.parseDouble(array2[2]), Double.parseDouble(array2[3]), Double.parseDouble(array2[4])));
                 //총 영양소 정보 갱신
-                mycal.setText(sum(items));
-                //list view 갱신
-                adapter.notifyDataSetChanged();
             }
+            //list view 갱신
+            mycal.setText(sum(items));
+            adapter.notifyDataSetChanged();
             MainActivity.check=-1;
         }
 

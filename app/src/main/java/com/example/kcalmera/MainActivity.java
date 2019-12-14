@@ -76,6 +76,7 @@ public class MainActivity extends FragmentActivity {
     public static Context mContext;
     public static String Food;
     public static int check=-1;
+
     SQLiteDatabase db;
 
     @Override
@@ -88,6 +89,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         createDatabase();// CreateActivity에서 생성 하려고한다.
+
 
         int firstviewshow = pref.getInt("First",0);
         if(firstviewshow != 1){
@@ -182,7 +184,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-
         Intent intent = getIntent();
         finish();
         startActivity(intent);

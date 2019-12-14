@@ -104,10 +104,14 @@ public class ImageClassifier {
             Log.e(TAG, "Image classifier has not been initialized; Skipped.");
             return "Uninitialized Classifier.";
         }
+        Log.e(TAG,"covertVitmapToByteBuffer start");
         convertBitmapToByteBuffer(bitmap);
+        Log.e(TAG,"covertVitmapToByteBuffer end");
         // Here's where the magic happens!!!
         long startTime = SystemClock.uptimeMillis();
+       // Log.e(TAG,"tflite.run start");
         tflite.run(imgData, labelProbArray);
+        //Log.e(TAG,"tflite.run end");
         long endTime = SystemClock.uptimeMillis();
         Log.d(TAG, "Timecost to run model inference: " + Long.toString(endTime - startTime));
 
@@ -115,7 +119,9 @@ public class ImageClassifier {
         //applyFilter();
 
         // print the results
+        Log.e(TAG,"printTopLabels start");
         String textToShow = printTopKLabels();
+        Log.e(TAG,"printTopLabels end");
         //textToShow = Long.toString(endTime - startTime) + "ms" + textToShow;
         return textToShow;
     }
@@ -184,6 +190,7 @@ public class ImageClassifier {
         bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
         // Convert the image to floating point.
         int pixel = 0;
+        //Log.d(TAG,String.format("before val: %x",intValues[0]));
         long startTime = SystemClock.uptimeMillis();
         for (int i = 0; i < DIM_IMG_SIZE_X; ++i) {
             for (int j = 0; j < DIM_IMG_SIZE_Y; ++j) {
@@ -194,6 +201,7 @@ public class ImageClassifier {
                 //Log.d(TAG, "Value test: " + (((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
             }
         }
+        //Log.d(TAG,"after val: " + imgData.getFloat(0) + " " +imgData.getFloat(1) +" " + imgData.getFloat(2));
         long endTime = SystemClock.uptimeMillis();
         Log.d(TAG, "Timecost to put values into ByteBuffer: " + Long.toString(endTime - startTime));
     }

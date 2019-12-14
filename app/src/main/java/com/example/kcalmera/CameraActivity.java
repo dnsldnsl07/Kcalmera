@@ -338,6 +338,9 @@ public class CameraActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        MainActivity.check = -1;
+
         setContentView(R.layout.activity_camera);
         mTextureView = findViewById(R.id.preViewScreen);
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
@@ -388,6 +391,8 @@ public class CameraActivity extends Activity {
                 intent.putExtra("INPUT_TEXT", setOfResults);
                 setResult(RESULT_OK, intent);
                 Food = setOfResults.split("/");
+                if(setOfResults.compareTo("") != 0)
+                    MainActivity.check = 1;
                 setOfResults = "";
                 semaphore = false;
                 finish();
@@ -402,8 +407,11 @@ public class CameraActivity extends Activity {
                 Log.e(TAG, "TextureView clicked");
                 //Toast.makeText(CameraActivity.this, "찰칵!!", Toast.LENGTH_SHORT).show();
 
-                if(semaphore == false)
+                if(semaphore == false) {
                     takePicture();
+                Log.e(TAG,"TakePicture start");
+                }
+
             }
         });
     }
@@ -439,7 +447,7 @@ public class CameraActivity extends Activity {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-            //Log.e(TAG, "onSurfaceTextureUpdated");
+            Log.e(TAG, "onSurfaceTextureUpdated");
         }
     };
 
@@ -684,10 +692,11 @@ public class CameraActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (null != mCameraDevice) {
+        Log.e("ppp","pause state");
+        /*if (null != mCameraDevice) {
             mCameraDevice.close();
             mCameraDevice = null;
-        }
+        }*/
     }
 
     protected void createSession() {
@@ -761,6 +770,7 @@ public class CameraActivity extends Activity {
                 public void onCaptureCompleted(CameraCaptureSession session,
                                                CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
+
                     try {
                         // mPreviewSession.stopRepeating();
                     }
@@ -797,6 +807,7 @@ public class CameraActivity extends Activity {
                 @Override
                 //At first, this method is called
                 public void onImageAvailable(ImageReader reader) {
+                    //Log.e(TAG,"imagereader start");
                     //bring last image in media..?
                     Image image = reader.acquireLatestImage();
 
@@ -840,14 +851,14 @@ public class CameraActivity extends Activity {
 
                         Bitmap resizeBitmap = ((MainActivity) MainActivity.mContext).resizeBitmap(rotatedBitmap);
 
-
+                        /*
                         File file = new File(Environment.getExternalStorageDirectory()+"/DCIM","pic.jpg");
                         FileOutputStream fos = new FileOutputStream(file);
 
                         //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                         resizeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        */
 
-                        Log.i(TAG, "image saved in" + Environment.getExternalStorageDirectory() + "/DCIM/pic.jpg");
 
                         ImageClassifier classifier = null;
 
@@ -857,7 +868,9 @@ public class CameraActivity extends Activity {
                             Log.e(TAG, "Failed to initialize an image classifier.");
                         }
 
+                        //Log.e("TfLite", "classify start");
                         String textToShow = classifier.classifyFrame(resizeBitmap);
+                        //Log.e("TfLite", "classify end");
 
                         String[] tempArray = textToShow.split(" ");
                        // if(Double.parseDouble(tempArray[1]) <  0.3)
@@ -867,12 +880,11 @@ public class CameraActivity extends Activity {
                         toast.show();
                         //else
                             setOfResults = setOfResults.concat(tempArray[0] + "/");
-                            MainActivity.check=1;
-
-                        semaphore = false;
+                            //MainActivity.check=1;
 
                         //TextView Foodview=(TextView) findViewById(R.id.DetectedFood);
                         //Foodview.setText(((MainActivity) MainActivity.mContext).Food);
+
 
                         if (classifier != null) {
                             classifier.close();
@@ -883,7 +895,6 @@ public class CameraActivity extends Activity {
                         FileOutputStream fos = new FileOutputStream(file);
                         //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                         rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);*/
-                        Log.i(TAG, "image saved in" + Environment.getExternalStorageDirectory() + "/DCIM/pic.jpg");
                         image.close();
                     }
                     catch(Exception e)
@@ -954,6 +965,8 @@ public class CameraActivity extends Activity {
                 public void onCaptureCompleted(CameraCaptureSession session,
                                                CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
+                    Log.e(TAG,"TakePicture end");
+                    semaphore = false;
                     try {
                         //mPreviewSession.stopRepeating();
                         //mPreviewSession.setRepeatingRequest(mPreviewBuilder.build(), null, null);
