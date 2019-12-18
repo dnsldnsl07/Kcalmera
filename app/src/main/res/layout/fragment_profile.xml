@@ -10,11 +10,12 @@
         android:id="@+id/headLineText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/calendar_background"
+        android:layout_marginTop="10dp"
+        android:background="@color/design_default_color_primary"
         android:gravity="center"
         android:text="오늘 섭취한 영양소"
-        android:textSize="30sp"
+        android:textColor="@color/ic_launcher_camera_icon_background"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@id/headLineSolid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
         android:id="@+id/infoScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/calendar_background"
+        android:background="@color/ic_launcher_camera_icon_background"
         app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,16 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/nutrients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -72,8 +71,8 @@
                         android:id="@+id/kcal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 2000"
                         android:textSize="20sp" />
 
@@ -100,8 +99,8 @@
                         android:id="@+id/carbohydrate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 200"
                         android:textSize="20sp" />
 
@@ -128,8 +127,8 @@
                         android:id="@+id/protein"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 55"
                         android:textSize="20sp" />
 
@@ -156,8 +155,8 @@
                         android:id="@+id/fat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 50"
                         android:textSize="20sp" />
 
@@ -184,8 +183,8 @@
                         android:id="@+id/natrium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 2000"
                         android:textSize="20sp" />
 
@@ -212,8 +211,8 @@
                         android:id="@+id/cholesterol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
                         android:bufferType="spannable"
+                        android:focusableInTouchMode="false"
                         android:text="0 / 300"
                         android:textSize="20sp" />
 
@@ -225,19 +224,16 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="4dp"
-                android:background="#AAAAAA" />
-
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="특이 사항"
                 android:layout_gravity="center"
-                android:textSize="25sp"/>
+                android:layout_marginTop="10dp"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:text="특이 사항"
+                android:textColor="@color/ic_launcher_camera_icon_background"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/recommendationMsgText"
@@ -245,21 +241,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="권장 콜레스테롤 섭취량을 초과했습니다."
-                android:textSize="20sp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="4dp"
-                android:background="#AAAAAA" />
+                android:textSize="20sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="추천 음식"
                 android:layout_gravity="center"
-                android:textSize="25sp"/>
+                android:layout_marginTop="10dp"
+                android:background="@color/design_default_color_primary"
+                android:gravity="center"
+                android:text="추천 음식"
+                android:textColor="@color/ic_launcher_camera_icon_background"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/foodRecommendationText"
@@ -267,7 +260,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text='저콜레스테롤\n과일 견과류 콩 생선'
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -286,6 +279,18 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@color/design_default_color_primary"
+            android:gravity="center"
+            android:text="사용자 정보"
+            android:textColor="@color/ic_launcher_camera_icon_background"
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

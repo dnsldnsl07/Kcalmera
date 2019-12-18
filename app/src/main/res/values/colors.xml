@@ -10,4 +10,6 @@
     <color name="main_container">#3DC3C3CD</color>
     <color name="nutritional_into_text">#70000000</color>
     <color name="Foodpopup_name">#000000</color>
+    <color name="red">#1FE82210</color>
+    <color name="redS">#E4EC352C</color>
 </resources>
