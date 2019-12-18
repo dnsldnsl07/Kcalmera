@@ -51,6 +51,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,7 +95,7 @@ public class CameraActivity extends Activity {
     private Size mChoosedPreview;
     int mWidth;
     int mHeight;
-    private Button ConfirmButton;
+    private ImageButton ConfirmButton;
     private Button PictureButton;
 
     private String setOfResults;
@@ -894,13 +895,21 @@ public class CameraActivity extends Activity {
                         //Log.e("TfLite", "classify end");
 
                         String[] tempArray = textToShow.split(" ");
-                       // if(Double.parseDouble(tempArray[1]) <  0.3)
-                            //Toast.makeText(CameraActivity.this, tempArray[0] + " 등록 실패", Toast.LENGTH_SHORT).show();
-                        Toast toast = Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER,0,360);
+                        /*Toast toast = Toast.makeText(CameraActivity.this, tempArray[0] + " " + tempArray[1], Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 360);
+                        toast.show();*/
+                        Toast toast = null;
+                        if(Double.parseDouble(tempArray[1]) <  0.5) {
+                            toast =  Toast.makeText(CameraActivity.this,"음식을 다시 인식해주세요", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 360);
+                            toast.show();
+                        }
+                        else{
+                        toast = Toast.makeText(CameraActivity.this, tempArray[0] + " 인식", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 360);
                         toast.show();
-                        //else
-                            setOfResults = setOfResults.concat(tempArray[0] + "/");
+                        setOfResults = setOfResults.concat(tempArray[0] + "/");
+                        }
                             //MainActivity.check=1;
 
                         //TextView Foodview=(TextView) findViewById(R.id.DetectedFood);
