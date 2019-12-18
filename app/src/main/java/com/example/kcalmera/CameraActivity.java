@@ -30,10 +30,12 @@ import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.media.Image;
 import android.media.ImageReader;
+import android.media.MediaActionSound;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
@@ -102,6 +104,8 @@ public class CameraActivity extends Activity {
     private static final int MAX_PREVIEW_HEIGHT = 1080;
     private int mSensorOrientation;
     private boolean semaphore;
+
+    private MediaActionSound sound;
 
     final int MY_PERMISSIONS_REQUEST_CAMERA = 1001;
 
@@ -341,11 +345,16 @@ public class CameraActivity extends Activity {
 
         MainActivity.check = -1;
 
+        //open sound effect
+        sound = new MediaActionSound();
+        sound.play(MediaActionSound.START_VIDEO_RECORDING);
+
         setContentView(R.layout.activity_camera);
         mTextureView = findViewById(R.id.preViewScreen);
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         ConfirmButton = findViewById(R.id.confirmButton);
         PictureButton = findViewById(R.id.pictureButton);
+
         //create and set texture view but not yet be create actually
         /*
         mTextureView = new TextureView(this);
@@ -400,7 +409,6 @@ public class CameraActivity extends Activity {
             }
         }); //버튼에 OnClickListener를 지정(OnClickListener)
 
-
         PictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -409,6 +417,8 @@ public class CameraActivity extends Activity {
 
                 if(semaphore == false) {
                     takePicture();
+                    //capture sound effect
+                    sound.play(MediaActionSound.SHUTTER_CLICK);
                 Log.e(TAG,"TakePicture start");
                 }
 
