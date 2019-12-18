@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:gravity="center"
         android:background="@color/calendar_background"
+        android:gravity="center"
         android:text="오늘 섭취한 영양소"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/headLineSolid"
@@ -309,7 +309,7 @@
                 android:background="@android:color/transparent"
                 android:focusableInTouchMode="false"
                 android:singleLine="true"
-                android:text="조영운"
+                android:text="-"
                 android:textSize="17dp" />
         </LinearLayout>
 
@@ -359,7 +359,7 @@
                 android:inputType="number"
                 android:maxLength="3"
                 android:singleLine="true"
-                android:text="25"
+                android:text="0"
                 android:textSize="17dp"
                 app:layout_constraintStart_toEndOf="@+id/ageText" />
 
@@ -398,7 +398,7 @@
                 android:inputType="numberDecimal"
                 android:maxLength="6"
                 android:singleLine="true"
-                android:text="178"
+                android:text="0"
                 android:textSize="17dp" />
 
             <TextView
@@ -429,7 +429,7 @@
                 android:inputType="numberDecimal"
                 android:maxLength="6"
                 android:singleLine="true"
-                android:text="70"
+                android:text="0"
                 android:textSize="17dp" />
 
             <TextView
