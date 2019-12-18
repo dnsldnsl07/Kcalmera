@@ -6,13 +6,20 @@
     android:layout_height="match_parent">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="213dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo" />
+
     <TextView
         android:id="@+id/registerInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:text="사용자 정보를 등록해주세요."
         android:textSize="24sp" />
 
@@ -89,7 +96,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="일주일에 얼마나 운동하시나요?"
