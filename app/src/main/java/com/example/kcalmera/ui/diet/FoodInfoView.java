@@ -40,6 +40,6 @@ public class FoodInfoView extends ConstraintLayout {
     }
     public void setText2(String foodinfo){
         String str[] = foodinfo.split("/");
-        foodInfo.setText(String.format("ㆍ1회 제공량: %sg\nㆍ칼로리: %skcal\nㆍ탄수화물: %sg\nㆍ단백질: %sg\nㆍ지방: %sg\nㆍ당류: %sg\nㆍ나트륨: %smg\nㆍ콜레스테롤: %smg\nㆍ포화지방산: %sg\n",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7],str[8]));
+        foodInfo.setText(String.format("          1회 제공량  %sg\n                 칼로리  %skcal\n             탄수화물  %sg\n                 단백질  %sg\n                     지방  %sg\n                     당류  %sg\n                 나트륨  %smg\n          콜레스테롤  %smg\n          포화지방산  %sg\n",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7],str[8]));
     }
 }

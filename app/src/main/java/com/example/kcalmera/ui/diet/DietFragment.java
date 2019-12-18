@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.kcalmera.CameraActivity;
@@ -543,6 +544,8 @@ public class DietFragment extends Fragment {
                 final FoodInfoView foodInfoView = new FoodInfoView(MainActivity.mContext);
                 foodInfoView.setText1(items.get(pos).strName);
                 foodInfoView.setText2(((MainActivity) MainActivity.mContext).selectFoodInfo2(items.get(pos).strName ));
+                //foodInfoView.setBackground(R.drawable.logo);
+                foodInfoView.foodInfo.setBackground(ContextCompat.getDrawable(((MainActivity) MainActivity.mContext),R.drawable.logo2));
                 alert.setView(foodInfoView);
 
                 alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
