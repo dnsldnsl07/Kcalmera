@@ -175,8 +175,6 @@ public class ProfileFragment extends Fragment {
                 ScrollView scrollView = (ScrollView) root.findViewById(R.id.infoScrollView);
                 scrollView.setVerticalScrollBarEnabled(true);
 
-
-
                 // 영양 분석 메시지 출력
                 boolean isKcalExceeded = (kcal > RECOMMENDED_KCAL);
                 boolean isCarbohydrateExceeded = (carbohydrate > RECOMMENDED_CARBOHYDRATE);
@@ -327,7 +325,11 @@ public class ProfileFragment extends Fragment {
                 //Log.d("DEBUG", restrictedFood.toString());
 
                 TextView foodRecommendationText = (TextView) root.findViewById(R.id.foodRecommendationText);
-                foodRecommendationText.setText(recommendedFood.toString());
+                if (isCarbohydrateExceeded && isProteinExceeded && isFatExceeded && isCholesterolExceeded) {
+                    foodRecommendationText.setText("-");
+                } else {
+                    foodRecommendationText.setText(recommendedFood.toString());
+                }
 
 
             }
