@@ -700,6 +700,16 @@ public class CameraActivity extends Activity {
         }*/
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Log.e("ppp","Back Button Pressed");
+        if (null != mCameraDevice) {
+            mCameraDevice.close();
+            mCameraDevice = null;
+        }
+    }
+
     protected void createSession() {
 
         if(null == mCameraDevice || !mTextureView.isAvailable() || null == mPreviewSize) {
