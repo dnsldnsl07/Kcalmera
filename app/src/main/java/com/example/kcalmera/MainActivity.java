@@ -81,6 +81,11 @@ public class MainActivity extends FragmentActivity {
     public static String Food;
     public static int check=-1;
 
+    public static String userSex;
+    public static String userAge;
+    public static String userHeight;
+    public static String userWeight;
+
     SQLiteDatabase db;
 
     @Override
@@ -135,6 +140,29 @@ public class MainActivity extends FragmentActivity {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         }
+
+
+
+        if(firstviewshow == 1) {
+            try {
+                BufferedReader br = null;
+                br = new BufferedReader(new FileReader("/mnt/sdcard/Android/data/com.example.kcalmera/files/Documents/" + "profile.txt"));
+                String s;
+                s = br.readLine();
+                s = br.readLine();
+                userSex = s;
+                s = br.readLine();
+                userAge = s;
+                s = br.readLine();
+                userHeight = s;
+                s = br.readLine();
+                userWeight = s;
+
+            } catch(Exception e)
+            {
+            }
+        }
+
 
         // 권한 체크
         TedPermission.with(getApplicationContext())
@@ -313,6 +341,12 @@ public class MainActivity extends FragmentActivity {
                 final String wtStr = Wt.getText().toString();
                 String sexStr=new String();
                 String exerStr=new String();
+                userSex = sexStr;
+                userAge = ageStr;
+                userHeight = htStr;
+                userWeight = wtStr;
+
+
                 int id = sexSelect.getCheckedRadioButtonId();
                 switch (id){
                     case R.id.mButtonE : sexStr="남성"; break;
@@ -327,6 +361,7 @@ public class MainActivity extends FragmentActivity {
                     case R.id.actButton5E : exerStr="전문 운동선수";
                 }
 
+                /*
                 BufferedReader br = null;
                 try {
                     br = new BufferedReader(new FileReader("/mnt/sdcard/Android/data/com.example.kcalmera/files/Documents/"+"profile.txt"));
@@ -334,7 +369,7 @@ public class MainActivity extends FragmentActivity {
                 catch (Exception e)
                 {
 
-                }
+                }*/
                 //File file = new File(getFilesDir(), "profile.txt") ;
                 File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath() + File.separator + "profile.txt");
                 FileWriter fw = null ;

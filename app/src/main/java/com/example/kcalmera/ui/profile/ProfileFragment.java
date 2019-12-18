@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.kcalmera.MainActivity;
 import com.example.kcalmera.R;
+import com.example.kcalmera.ui.diet.DietFragment;
 
 import org.w3c.dom.Text;
 

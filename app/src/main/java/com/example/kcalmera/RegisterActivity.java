@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.kcalmera.ui.diet.DietFragment;
+
 import org.w3c.dom.Text;
 
 import java.io.BufferedWriter;
@@ -66,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("register",MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-
                 //if(모두 빈 스트링이 아니면)
 
                 editor.putInt("First", 1);
@@ -88,6 +89,14 @@ public class RegisterActivity extends AppCompatActivity {
                     bufwr.write(height+"\n");
                     bufwr.write(weight+"\n");
                     bufwr.write(exercise+"\n");
+
+                    //network
+
+                    MainActivity.userSex = sex;
+                    MainActivity.userAge = age;
+                    MainActivity.userHeight = height;
+                    MainActivity.userWeight = weight;
+
                     bufwr.flush() ;
                 } catch (Exception e) {
                     e.printStackTrace() ;

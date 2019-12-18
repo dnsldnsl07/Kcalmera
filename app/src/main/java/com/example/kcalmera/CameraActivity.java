@@ -447,7 +447,8 @@ public class CameraActivity extends Activity {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-            Log.e(TAG, "onSurfaceTextureUpdated");
+            //개 많이 출력됨
+            //Log.e(TAG, "onSurfaceTextureUpdated");
         }
     };
 

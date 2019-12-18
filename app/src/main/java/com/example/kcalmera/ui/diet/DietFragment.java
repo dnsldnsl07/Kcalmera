@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,18 @@ import com.example.kcalmera.CameraActivity;
 import com.example.kcalmera.MainActivity;
 import com.example.kcalmera.R;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,6 +89,16 @@ public class DietFragment extends Fragment {
 
     private DietViewModel dietViewModel;
 
+    //network
+    public static ArrayList<String[]> userInfos = new ArrayList<String[]>();
+    public static String[] sendData;
+    //network
+    public static String url = "http://15.164.164.230/data";
+
+    //이거 한발에 한번 간다.
+    //new JSONTask().execute(url);//AsyncTask 시작시킴
+
+
     public String sum(ArrayList<ItmStr> items){
         int size = items.size();
         double amount;
@@ -116,6 +139,15 @@ public class DietFragment extends Fragment {
         final int[] y = new int[1];
         final int[] m = new int[1];
         final int[] d = new int[1];
+
+        /**
+         * JSONTASK가 비동기적이라 한번에 몰아서 보내줘야 한다.
+         */
+        int size = userInfos.size();
+        for(int i=0;i<size;i++) {
+            new JSONTask().execute(url);
+        }
+
 
         //calendar에서 선택된 날짜를 갖고있기 위해 만든 변수
         y[0] = curYear;
@@ -161,6 +193,7 @@ public class DietFragment extends Fragment {
                         str = ((MainActivity) MainActivity.mContext).insertRecord2(foodName[i], amount, "" + y[0] + t1 + m[0] + t2 + d[0]);
                     } else
                         str = ((MainActivity) MainActivity.mContext).insertRecord(foodName[i], amount);
+
                 } catch (Exception e) {
                     Log.e("eee_add_pop_error", e.getMessage());
                 }
@@ -168,8 +201,19 @@ public class DietFragment extends Fragment {
                 array2 = food_info.split("/");
                 array = str.split("/");
 
-                //list에 추가
+                //network
+                String[] userInfo = new String[7];
+                userInfo[0] = MainActivity.userSex;
+                userInfo[1] = MainActivity.userAge;
+                userInfo[2] = MainActivity.userHeight;
+                userInfo[3] = MainActivity.userWeight;
+                userInfo[4] = array[2];//시간
+                userInfo[5] = array[0];//이른
+                userInfo[6] = array[1];//양
+                userInfos.add(userInfo);
+                //new JSONTask().execute(url);
 
+                //list에 추가
                 items.add(new ItmStr(array[0], Double.parseDouble(array[1]), array[2], Integer.parseInt(array[3]), Double.parseDouble(array2[0]), Double.parseDouble(array2[1]), Double.parseDouble(array2[2]), Double.parseDouble(array2[3]), Double.parseDouble(array2[4])));
                 //총 영양소 정보 갱신
             }
@@ -243,6 +287,18 @@ public class DietFragment extends Fragment {
                             //식단 table과 음식정보 table에서 가져온 정보를 쪼갬
                             array2 = food_info.split("/");
                             array = str.split("/");
+
+                            //network
+                            String[] userInfo = new String[7];
+                            userInfo[0] = MainActivity.userSex;
+                            userInfo[1] = MainActivity.userAge;
+                            userInfo[2] = MainActivity.userHeight;
+                            userInfo[3] = MainActivity.userWeight;
+                            userInfo[4] = array[2];//시간
+                            userInfo[5] = array[0];//이른
+                            userInfo[6] = array[1];//양
+                            userInfos.add(userInfo);
+                            //new JSONTask().execute(url);
 
                             //list에 추가
 
@@ -501,6 +557,105 @@ public class DietFragment extends Fragment {
         });
 
         return root;
+    }
+
+    //network
+    //server db에 보내는 내용 정의
+    public void sendData(JSONObject jsonObject, String[] inform)
+    {
+        try
+        {
+            jsonObject.accumulate("sex", inform[0]);
+            jsonObject.accumulate("age", inform[1]);
+            jsonObject.accumulate("height", inform[2]);
+            jsonObject.accumulate("weight", inform[3]);
+            jsonObject.accumulate("time", inform[4]);
+            jsonObject.accumulate("food_name", inform[5]);
+            jsonObject.accumulate("amount", inform[6]);
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+
+    public class JSONTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            try {
+                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+                HttpURLConnection con = null;
+                BufferedReader reader = null;
+
+                try{
+                    URL url = new URL(urls[0]);
+                    //연결을 함
+                    con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("POST");//POST방식으로 보냄
+                    con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
+                    con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
+                    con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
+                    con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+                    con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
+                    con.connect();
+                    //서버로 보내기위해서 스트림 만듬
+                    OutputStream outStream = con.getOutputStream();
+                    //버퍼를 생성하고 넣음
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+                    JSONObject jsonObject = new JSONObject();
+
+                    sendData = userInfos.get(0);
+                    userInfos.remove(0);
+
+                    sendData(jsonObject, sendData);
+                    writer.write(jsonObject.toString());
+                    writer.flush();
+                    writer.close();//버퍼를 닫아줌
+
+                    //서버로 부터 데이터를 받음
+                    InputStream stream = con.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    StringBuffer buffer = new StringBuffer();
+
+                    String line = "";
+                    while((line = reader.readLine()) != null){
+                        buffer.append(line);
+                    }
+                    return buffer.toString();
+
+
+                    //return "why";
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if(con != null){
+                        con.disconnect();
+                    }
+                    try {
+                        if(reader != null){
+                            reader.close();//버퍼를 닫아줌
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.e("network","result: '"+result+"'");
+        }
     }
 }
 
