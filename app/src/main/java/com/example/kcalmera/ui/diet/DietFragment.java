@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -545,7 +546,9 @@ public class DietFragment extends Fragment {
                 foodInfoView.setText1(items.get(pos).strName);
                 foodInfoView.setText2(((MainActivity) MainActivity.mContext).selectFoodInfo2(items.get(pos).strName ));
                 //foodInfoView.setBackground(R.drawable.logo);
-                foodInfoView.foodInfo.setBackground(ContextCompat.getDrawable(((MainActivity) MainActivity.mContext),R.drawable.logo2));
+                foodInfoView.foodInfo.setBackground(ContextCompat.getDrawable((MainActivity) MainActivity.mContext,R.drawable.logo2));
+                foodInfoView.foodName.setBackground(ContextCompat.getDrawable((MainActivity) MainActivity.mContext,R.color.design_default_color_primary));
+                foodInfoView.foodName.setTextColor(Color.WHITE);
                 alert.setView(foodInfoView);
 
                 alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
