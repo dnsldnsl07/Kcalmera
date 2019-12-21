@@ -189,7 +189,7 @@ public class ProfileFragment extends Fragment {
                 TextView natriumText = (TextView) root.findViewById(R.id.natrium);
                 TextView cholesterolText = (TextView) root.findViewById(R.id.cholesterol);
 
-                ArrayList<String> recommendationMsgs = new ArrayList<>();
+                // ArrayList<String> recommendationMsgs = new ArrayList<>();
                 String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
                 kcalText.setText(textLine);
                 Spannable span = (Spannable) kcalText.getText();
@@ -197,7 +197,7 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isKcalExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 칼로리 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 칼로리 섭취량을 초과했습니다.");
                 }
 
                 textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
@@ -207,7 +207,7 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isCarbohydrateExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 탄수화물 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 탄수화물 섭취량을 초과했습니다.");
                 }
 
                 textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
@@ -217,7 +217,7 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isProteinExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 단백질 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 단백질 섭취량을 초과했습니다.");
                 }
 
                 textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
@@ -227,7 +227,7 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isFatExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 지방 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 지방 섭취량을 초과했습니다.");
                 }
 
                 textLine = (int)natrium + " / " + NATRIUM_BOUND;
@@ -237,7 +237,7 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isNatriumExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 나트륨 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 나트륨 섭취량을 초과했습니다.");
                 }
 
                 textLine = (int)cholesterol + " / " + CHOLESTEROL_BOUND;
@@ -247,9 +247,10 @@ public class ProfileFragment extends Fragment {
                 span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 if (isCholesterolExceeded) {
                     span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    recommendationMsgs.add("권장 콜레스테롤 섭취량을 초과했습니다.");
+                    // recommendationMsgs.add("권장 콜레스테롤 섭취량을 초과했습니다.");
                 }
 
+                /*
                 String recommendationMsg = null;
                 if (recommendationMsgs.size() == 0) {
                     recommendationMsg = "특이 사항이 없습니다.";
@@ -262,33 +263,8 @@ public class ProfileFragment extends Fragment {
 
                 TextView recommendationMsgText = (TextView) root.findViewById(R.id.recommendationMsgText);
                 recommendationMsgText.setText(recommendationMsg);
-
-                // 음식 추천
-                /*
-                String foodList = null;
-                if (isCarbohydrateExceeded) {
-                    foodList = "저탄수화물 음식: " + TextUtils.join(" ", LOW_CARBOHYDRATE_FOODS);
-                } else {
-                    foodList = "고탄수화물 음식: " + TextUtils.join(" ", HIGH_CARBOHYDRATE_FOODS);
-                }
-
-                if (isProteinExceeded) {
-                    foodList += "\n저단백질 음식: " + TextUtils.join(" ", LOW_PROTEIN_FOODS);
-                } else {
-                    foodList += "\n고단백질 음식: " + TextUtils.join(" ", HIGH_PROTEIN_FOODS);
-                }
-
-                if (isFatExceeded) {
-                    foodList += "\n저지방 음식: " + TextUtils.join(" ", LOW_FAT_FOODS);
-                } else {
-                    foodList += "\n고지방 음식: " + TextUtils.join(" ", HIGH_FAT_FOODS);
-                }
-
-                if (isCholesterolExceeded) {
-                    foodList += "\n저콜레스테롤 음식: " + TextUtils.join(" ", LOW_CHOLESTEROL_FOODS);
-                }
                 */
-
+                // 음식 추천
                 HashSet<String> recommendedFood = new HashSet<>();
                 HashSet<String> restrictedFood = new HashSet<>();
                 if (isCarbohydrateExceeded) {
@@ -319,16 +295,51 @@ public class ProfileFragment extends Fragment {
                     Collections.addAll(recommendedFood, LOW_CHOLESTEROL_FOODS);
                 }
 
-                //Log.d("DEBUG", recommendedFood.toString());
                 recommendedFood.removeAll(restrictedFood);
-                //Log.d("DEBUG", recommendedFood.toString());
-                //Log.d("DEBUG", restrictedFood.toString());
+
+                String foodRecommendation = "";
+                if (isCarbohydrateExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, LOW_CARBOHYDRATE_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저탄수화물 음식 " + tmp.toString() + '\n';
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, HIGH_CARBOHYDRATE_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "탄수화물 보충 음식 " + tmp.toString() + '\n';
+                }
+
+                if (isProteinExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, LOW_PROTEIN_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저단백질 음식 " + tmp.toString() + '\n';
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, HIGH_PROTEIN_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "단백질 보충 음식 " + tmp.toString() + '\n';
+                }
+
+                if (isFatExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, LOW_FAT_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저지방 음식 " + tmp.toString();
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, HIGH_FAT_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "지방 보충 음식 " + tmp.toString();
+                }
+
 
                 TextView foodRecommendationText = (TextView) root.findViewById(R.id.foodRecommendationText);
                 if (isCarbohydrateExceeded && isProteinExceeded && isFatExceeded && isCholesterolExceeded) {
                     foodRecommendationText.setText("-");
                 } else {
-                    foodRecommendationText.setText(recommendedFood.toString());
+                    foodRecommendationText.setText(foodRecommendation);
                 }
 
 

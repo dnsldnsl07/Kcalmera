@@ -223,7 +223,7 @@
                         android:textSize="23sp" />
                 </LinearLayout>
             </LinearLayout>
-
+            <!--
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -242,6 +242,7 @@
                 android:layout_gravity="center"
                 android:text="권장 콜레스테롤 섭취량을 초과했습니다."
                 android:textSize="20sp" />
+            -->
 
             <TextView
                 android:layout_width="match_parent"
@@ -259,7 +260,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text='저콜레스테롤\n과일 견과류 콩 생선'
+                android:text='[과일, 견과류, 콩, 생선]'
                 android:textSize="20sp" />
 
 

@@ -467,6 +467,7 @@ public class MainActivity extends FragmentActivity {
                 boolean isNatriumExceeded = (natrium > ProfileFragment.NATRIUM_BOUND);
                 boolean isCholesterolExceeded = (cholesterol > ProfileFragment.CHOLESTEROL_BOUND);
 
+                /*
                 ArrayList<String> recommendationMsgs = new ArrayList<>();
                 if (isKcalExceeded) {
                     recommendationMsgs.add("권장 칼로리 섭취량을 초과했습니다.");
@@ -504,32 +505,9 @@ public class MainActivity extends FragmentActivity {
 
                 TextView recommendationMsgText = (TextView) findViewById(R.id.recommendationMsgText);
                 recommendationMsgText.setText(recommendationMsg);
+                */
 
                 // 음식 추천
-                /*
-                String foodList = null;
-                if (isCarbohydrateExceeded) {
-                    foodList = "저탄수화물 음식: " + TextUtils.join(" ", LOW_CARBOHYDRATE_FOODS);
-                } else {
-                    foodList = "고탄수화물 음식: " + TextUtils.join(" ", HIGH_CARBOHYDRATE_FOODS);
-                }
-
-                if (isProteinExceeded) {
-                    foodList += "\n저단백질 음식: " + TextUtils.join(" ", LOW_PROTEIN_FOODS);
-                } else {
-                    foodList += "\n고단백질 음식: " + TextUtils.join(" ", HIGH_PROTEIN_FOODS);
-                }
-
-                if (isFatExceeded) {
-                    foodList += "\n저지방 음식: " + TextUtils.join(" ", LOW_FAT_FOODS);
-                } else {
-                    foodList += "\n고지방 음식: " + TextUtils.join(" ", HIGH_FAT_FOODS);
-                }
-
-                if (isCholesterolExceeded) {
-                    foodList += "\n저콜레스테롤 음식: " + TextUtils.join(" ", LOW_CHOLESTEROL_FOODS);
-                }
-                */
 
                 HashSet<String> recommendedFood = new HashSet<>();
                 HashSet<String> restrictedFood = new HashSet<>();
@@ -574,32 +552,64 @@ public class MainActivity extends FragmentActivity {
                 String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
                 kcalText.setText(textLine);
                 Spannable span = (Spannable) kcalText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isKcalExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 칼로리 섭취량을 초과했습니다.");
+                }
+
 
                 textLine = (int)carbohydrate + " / " + (int)RECOMMENDED_CARBOHYDRATE;
                 carbohydrateText.setText(textLine);
                 span = (Spannable) carbohydrateText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isCarbohydrateExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 탄수화물 섭취량을 초과했습니다.");
+                }
 
                 textLine = (int)protein + " / " + (int)RECOMMENDED_PROTEIN;
                 proteinText.setText(textLine);
                 span = (Spannable) proteinText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isProteinExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 단백질 섭취량을 초과했습니다.");
+                }
 
                 textLine = (int)fat + " / " + (int)RECOMMENDED_FAT;
                 fatText.setText(textLine);
                 span = (Spannable) fatText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isFatExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 지방 섭취량을 초과했습니다.");
+                }
 
                 textLine = (int)natrium + " / " + ProfileFragment.NATRIUM_BOUND;
                 natriumText.setText(textLine);
                 span = (Spannable) natriumText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isNatriumExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 나트륨 섭취량을 초과했습니다.");
+                }
 
                 textLine = (int)cholesterol + " / " + ProfileFragment.CHOLESTEROL_BOUND;
                 cholesterolText.setText(textLine);
                 span = (Spannable) cholesterolText.getText();
-                span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new RelativeSizeSpan(1.1f), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StyleSpan(Typeface.BOLD), 0, textLine.indexOf("/"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (isCholesterolExceeded) {
+                    span.setSpan(new ForegroundColorSpan(Color.RED), 0, textLine.indexOf("/"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    // recommendationMsgs.add("권장 콜레스테롤 섭취량을 초과했습니다.");
+                }
+
 
                 final TextView textViewName = findViewById(R.id.nameText2);
                 final TextView textViewSex = findViewById(R.id.sexText2);
