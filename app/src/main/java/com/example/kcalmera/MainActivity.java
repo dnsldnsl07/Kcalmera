@@ -541,13 +541,49 @@ public class MainActivity extends FragmentActivity {
 
                 recommendedFood.removeAll(restrictedFood);
 
+                String foodRecommendation = "";
+                if (isCarbohydrateExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.LOW_CARBOHYDRATE_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저탄수화물 음식 " + tmp.toString() + '\n';
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.HIGH_CARBOHYDRATE_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "탄수화물 보충 음식 " + tmp.toString() + '\n';
+                }
+
+                if (isProteinExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.LOW_PROTEIN_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저단백질 음식 " + tmp.toString() + '\n';
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.HIGH_PROTEIN_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "단백질 보충 음식 " + tmp.toString() + '\n';
+                }
+
+                if (isFatExceeded) {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.LOW_FAT_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "저지방 음식 " + tmp.toString();
+                } else {
+                    HashSet<String> tmp = new HashSet<>();
+                    Collections.addAll(tmp, ProfileFragment.HIGH_FAT_FOODS);
+                    tmp.retainAll(recommendedFood);
+                    foodRecommendation += "지방 보충 음식 " + tmp.toString();
+                }
+
                 TextView foodRecommendationText = (TextView) findViewById(R.id.foodRecommendationText);
                 if (isCarbohydrateExceeded && isProteinExceeded && isFatExceeded && isCholesterolExceeded) {
                     foodRecommendationText.setText("-");
                 } else {
-                    foodRecommendationText.setText(recommendedFood.toString());
+                    foodRecommendationText.setText(foodRecommendation);
                 }
-
 
                 String textLine = (int)kcal + " / " + (int)RECOMMENDED_KCAL;
                 kcalText.setText(textLine);
